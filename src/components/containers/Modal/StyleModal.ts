@@ -44,7 +44,9 @@ export const Container = styled.div`
   background-color: var(--gray10);
   box-shadow: var(--shadow-3pt);
 
-  ${({$smallContainer}) => $smallContainer ? `
+  ${({ $smallContainer }) =>
+    $smallContainer
+      ? `
     justify-content: space-between;
     gap: 10px;
     width: 400px;
@@ -57,7 +59,8 @@ export const Container = styled.div`
       height: 190px;
       padding: 16px;
     }
-    ` : `
+    `
+      : `
 
     width: 612px;
     height: 454px;
@@ -69,6 +72,5 @@ export const Container = styled.div`
       width: 327px;
       height: 568px;
     }
-  `
-  }
+  `}
 `;

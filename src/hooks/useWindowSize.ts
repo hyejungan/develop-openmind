@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useWindowSizeCustom () {
+export default function useWindowSizeCustom() {
   // 초기 state 값은 undefined로 세팅한다.
   const [windowSize, setWindowSize] = useState({
     width: undefined,
@@ -33,4 +33,4 @@ export default function useWindowSizeCustom () {
     }
   }, []); // 컴포넌트가 처음 마운트 될때와 언마운트 될 때 실행
   return windowSize;
-};
+}

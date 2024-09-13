@@ -4,7 +4,7 @@ import ThumbsUpButton from 'components/common/ReactionButton/ThumbsUpButton';
 import ThumbsDownButton from 'components/common/ReactionButton/ThumbsDownDown';
 
 const ReactionButton = () => {
-  const [counting, setCounting] = useState({up : null, down : null});
+  const [counting, setCounting] = useState({ up: null, down: null });
 
   const handleCount = (type) => {
     if (!counting[type]) {

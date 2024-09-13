@@ -5,7 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   gap: 10px;
 
-  label{
+  label {
     border-radius: 70%;
     overflow: hidden;
 
@@ -14,7 +14,7 @@ export const Container = styled.div`
     }
   }
 
-  img{
+  img {
     width: 150px;
     border-radius: 70%;
     overflow: hidden;

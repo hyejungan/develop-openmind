@@ -14,24 +14,25 @@ function InputImage({ name, value, onChange }) {
     if (value && typeof value !== 'string') {
       const nextPreview = URL.createObjectURL(value);
       setPreview(nextPreview);
-    } else if (typeof value === 'string'){
+    } else if (typeof value === 'string') {
       setPreview(value);
-    } else{
-      setPreview(null)
+    } else {
+      setPreview(null);
     }
     return () => {
       if (preview && typeof value !== 'string') {
         URL.revokeObjectURL(preview);
       }
     };
-
   }, [value]);
 
   return (
     <Style.Container>
-      <label htmlFor='file-input' ><img src={preview} alt="이미지 미리보기" /></label>
+      <label htmlFor="file-input">
+        <img src={preview} alt="이미지 미리보기" />
+      </label>
       <input
-        id='file-input'
+        id="file-input"
         type="file"
         accept="image/png, image/jpeg"
         onChange={handleChange}

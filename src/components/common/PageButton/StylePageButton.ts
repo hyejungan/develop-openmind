@@ -15,10 +15,10 @@ export const PageButton = styled.button`
   font-family: Actor;
   line-height: 125%;
   color: ${({ $select, theme }) =>
-    $select === 'selected' ? `${theme.color.color3}`: `${theme.color.color4}`};
+    $select === 'selected' ? `${theme.color.color3}` : `${theme.color.color4}`};
 
   &:hover {
-    color: ${({theme}) => theme.color.color5};
+    color: ${({ theme }) => theme.color.color5};
   }
 `;
 

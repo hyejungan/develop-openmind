@@ -16,13 +16,14 @@
     "react-scripts": "5.0.1",
     "react-snowfall": "^1.2.1",
     "styled-components": "^6.1.0",
+    "typescript": "^5.6.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prettier" : "prettier --cache --write .",
+    "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
     "prepare": "husky install"
   },

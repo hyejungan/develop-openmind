@@ -9,7 +9,7 @@ export const Input = styled(InputBox)`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     top: 60%;
     left: 50%;
   }

@@ -16,10 +16,10 @@ export const Container = styled.div`
   overflow: hidden;
   flex-shrink: 0;
   text-align: center;
-  cursor: ${({$filter}) => $filter && 'pointer'};
+  cursor: ${({ $filter }) => $filter && 'pointer'};
 
   :hover {
-    filter: ${({$filter}) => $filter && `brightness(0.5)`};
+    filter: ${({ $filter }) => $filter && `brightness(0.5)`};
   }
 
   @media (max-width: 767px) {
