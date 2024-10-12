@@ -18,7 +18,8 @@ export const ToggleBox = styled.div<{ ison: string }>`
   width: 50px;
   height: 24px;
   border-radius: 30px;
-  background-color: ${({ ison }) => (ison === 'true' ? '#942920' : 'var(--brown20)')};
+  background-color: ${({ ison }) =>
+    ison === 'true' ? '#942920' : 'var(--brown20)'};
   ${({ ison }) => ison === 'true' && `transition: 0.5s`};
   transition: 0.5s;
 `;
