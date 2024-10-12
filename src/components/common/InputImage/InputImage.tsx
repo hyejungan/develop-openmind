@@ -1,11 +1,17 @@
 import { useRef, useState, useEffect } from 'react';
 import * as Style from './StyleInputImage';
+//TODO : value type => api image src type 확인하기
+type InputImageTypes = {
+  name : string;
+  value : any;
+  onChange: (value: string, nextValue?: File, name ?: string) => void;
+};
 
-function InputImage({ name, value, onChange }) {
+function InputImage({ name, value, onChange } : InputImageTypes) {
   const [preview, setPreview] = useState(null);
   const inputRef = useRef();
 
-  const handleChange = (e) => {
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     const nextValue = e.target.files[0];
     onChange(name, nextValue);
   };

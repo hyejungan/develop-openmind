@@ -1,12 +1,26 @@
 import * as Styled from './StyleProfileImage';
 
-function ProfileImage({ src, size, mobilesize, onClick, filter }) {
+type ProfileImageTypes = {
+  src: string;
+  size?: 'xLarge' | 'mediumLarge' | 'mediumSmall' | 'xSmall';
+  mobileSize?: 'large' | 'mediumSmall';
+  onClick?: () => void;
+  filter?: boolean;
+};
+
+function ProfileImage({
+  src,
+  size,
+  mobileSize,
+  onClick,
+  filter,
+}: ProfileImageTypes) {
   return (
     <Styled.Container
-      $size={size}
-      $mobilesize={mobilesize}
+      size={size}
+      mobileSize={mobileSize}
       onClick={onClick}
-      $filter={filter}
+      filter={filter}
     >
       <Styled.Img src={src} alt="프로필이미지" />
     </Styled.Container>

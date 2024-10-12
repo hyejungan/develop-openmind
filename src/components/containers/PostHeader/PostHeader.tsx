@@ -1,15 +1,22 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { getSubjects } from 'api/api';
 import { ThemeContext } from 'styled-components';
-import { ProfileImage, ButtonShare, AccountForm } from 'components';
+import { ProfileImage, ButtonShare, AccountForm} from 'components';
 import Modal from '../Modal/Modal';
 import useModal from 'hooks/useModal';
 import logoImg from 'assets/logo.svg';
 import christmasLogoImg from 'assets/christmas-logo.png';
 import * as Styled from './StylePostHeader';
 
-function PostHeader({ id, setterSubjectName, setterSubjectImg, filter }) {
+type PostHeaderTypes = {
+  id : string;
+  setterSubjectName : React.Dispatch<React.SetStateAction<string>>;
+  setterSubjectImg : React.Dispatch<React.SetStateAction<string>>;
+  filter : boolean;
+}
+
+function PostHeader({ id, setterSubjectName, setterSubjectImg, filter } : PostHeaderTypes) {
   const navigate = useNavigate();
   const location = useLocation();
   const isAnswerPage = location.pathname.split('/')[3];
@@ -19,9 +26,9 @@ function PostHeader({ id, setterSubjectName, setterSubjectImg, filter }) {
   const [subjectImg, setSubjectImg] = useState('');
   const theme = useContext(ThemeContext);
 
-  const getSubjectInfo = async (subjectId) => {
+  const getSubjectInfo = async (subjectId : string) => {
     try {
-      const result = await getSubjects(subjectId);
+      const result = await getSubjects({id : subjectId});
       const { name, imageSource } = result;
       setSubjectName(name);
       setSubjectImg(imageSource);
@@ -47,7 +54,7 @@ function PostHeader({ id, setterSubjectName, setterSubjectImg, filter }) {
           <ProfileImage
             src={subjectImg}
             size="xLarge"
-            mobilesize="large"
+            mobileSize="large"
             onClick={isAnswerPage ? openModal : closeModal}
             filter={isAnswerPage && filter}
           />

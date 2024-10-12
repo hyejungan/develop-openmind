@@ -2,6 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { deleteQuestion, deleteAnswer, postAnswer } from 'api/api';
 import MoreMenu from '../../common/DropDownList/MoreMenu';
 import * as Styled from './StyleMore';
+import { CardSectionAnswerType } from '../FeedCard/FeedCardSection';
+
+type MoreTypes = {
+  answerId : number;
+  setAnswer : React.Dispatch<React.SetStateAction<CardSectionAnswerType>>;
+  questionId : number;
+  isRejected : boolean;
+  setTotal : React.Dispatch<React.SetStateAction<number>>;
+  setQuestionData : React.Dispatch<React.SetStateAction<{
+    data: any[];
+}>>;
+}
 
 export default function More({
   answerId,
@@ -10,7 +22,7 @@ export default function More({
   isRejected,
   setTotal,
   setQuestionData,
-}) {
+} : MoreTypes) {
   const buttonRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,7 +30,7 @@ export default function More({
     setIsOpen(isOpen ? false : true);
   };
 
-  const handleDeleteQuestion = async (id) => {
+  const handleDeleteQuestion = async (id : number) => {
     await deleteQuestion(id);
     setTotal((prevTotal) => prevTotal - 1);
     setQuestionData((prevData) => ({
@@ -26,25 +38,25 @@ export default function More({
     }));
   };
 
-  const handleDeleteAnswer = async (id) => {
+  const handleDeleteAnswer = async (id : number) => {
     await deleteAnswer(id);
     setAnswer(null);
   };
 
-  const handleRejectAnswer = async (id) => {
+  const handleRejectAnswer = async (id : number) => {
     try {
       const formData = JSON.stringify({
         content: 'rejected',
         isRejected: true,
       });
-      const result = await postAnswer(id, formData);
+      const result = await postAnswer({id, formData});
       setAnswer(result);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleOutsideClick = (e) => {
+  const handleOutsideClick = (e : MouseEvent) => {
     if (e.target !== buttonRef.current) {
       setIsOpen(false);
     }
@@ -64,14 +76,14 @@ export default function More({
       </button>
       {isOpen && (
         <MoreMenu
-          data={[
+          data={{
             questionId,
             answerId,
             isRejected,
             handleDeleteQuestion,
             handleDeleteAnswer,
             handleRejectAnswer,
-          ]}
+          }}
         />
       )}
     </Styled.Container>

@@ -6,7 +6,13 @@ import logoImg from 'assets/logo.svg';
 import christmasLogoImg from 'assets/christmas-logo.png';
 import * as Styled from './StyleNavBar';
 
-const NavBar = ({ children, onClick, setTheme }) => {
+type NavBarTypes = {
+  children : React.ReactNode;
+  onClick : React.MouseEventHandler;
+  setTheme ?: (theme : any) => void;
+}
+
+const NavBar = ({ children, onClick, setTheme } : NavBarTypes) => {
   const location = useLocation();
   const [navProp, setNavProp] = useState('');
   const theme = useContext(ThemeContext);
@@ -20,7 +26,7 @@ const NavBar = ({ children, onClick, setTheme }) => {
   }, [location]);
 
   return (
-    <Styled.NavBarContainer $location={navProp}>
+    <Styled.NavBarContainer location={navProp}>
       <Styled.NavBarLogoBox>
         {location.pathname === '/' ? (
           <Toggle setTheme={setTheme} />

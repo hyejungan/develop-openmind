@@ -4,8 +4,15 @@ import { ReactComponent as MessageImg } from 'assets/icon/messages.svg';
 import { ReactComponent as SantaImg } from 'assets/santa.svg';
 import * as Styled from './StyleFeedCardSection';
 import { ThemeContext } from 'styled-components';
+import { getCardSectionType } from './FeedCardSection';
 
-const QuestionFeedCardSection = ({ total, data, subjectData }) => {
+type QuestionFeedCardSectionTypes = {
+  total : number;
+  data : getCardSectionType[];
+  subjectData : string[];
+}
+
+const QuestionFeedCardSection = ({ total, data, subjectData } : QuestionFeedCardSectionTypes) => {
   const theme = useContext(ThemeContext);
 
   return (

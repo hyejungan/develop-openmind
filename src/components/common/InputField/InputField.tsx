@@ -1,23 +1,27 @@
 import { useState } from 'react';
 import * as Styled from './StyleInputField';
 
-const InputField = ({ onChange }) => {
-  const [isFocused, setIsFocused] = useState('false');
+type InputFieldPropsTypes = {
+  onChange: (value: string) => void;
+};
+
+const InputField: React.FC<InputFieldPropsTypes> = ({ onChange }) => {
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputFocus = () => {
-    setIsFocused('true');
+    setIsFocused(true);
   };
 
   const handleInputBlur = () => {
-    setIsFocused('false');
+    setIsFocused(false);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   return (
-    <Styled.InputFieldBox $focused={isFocused}>
+    <Styled.InputFieldBox focused={isFocused}>
       <Styled.PersonImg />
       <Styled.InputField
         onFocus={handleInputFocus}

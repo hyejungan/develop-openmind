@@ -1,6 +1,17 @@
 import * as Style from './StyleAccountDelete';
 
-const AccountDelete = ({ onClick, visible, setVisible }) => {
+type VisibleType = {
+  boolean : boolean;
+  message: string;
+}
+
+type AccountDeleteTypes = {
+  onClick : React.MouseEventHandler<HTMLButtonElement>;
+  visible : VisibleType;
+  setVisible: React.Dispatch<React.SetStateAction<VisibleType>>;
+}
+
+const AccountDelete = ({ onClick, visible, setVisible } : AccountDeleteTypes) => {
   const onClose = () => {
     setVisible((prev) => ({ ...prev, boolean: false }));
   };

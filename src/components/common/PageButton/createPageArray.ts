@@ -1,4 +1,4 @@
-export default function createPageArray(total, pageNum, arrLen) {
+export default function createPageArray(total: number, pageNum : number, arrLen : number) {
   let pageArray = [];
 
   //1. arrLen>=TotalPage
@@ -11,8 +11,8 @@ export default function createPageArray(total, pageNum, arrLen) {
 
   //2. arrLen<TotalPage
   let SIDE = Math.floor(arrLen / 2);
-  let firstNum = +pageNum - SIDE;
-  let lastNum = +pageNum + SIDE;
+  let firstNum = pageNum - SIDE;
+  let lastNum = pageNum + SIDE;
 
   //배열의 시작 숫자 조정하기
   if (firstNum < 1) firstNum = 1;

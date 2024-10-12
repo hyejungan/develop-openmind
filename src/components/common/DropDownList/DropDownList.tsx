@@ -1,12 +1,18 @@
 import * as Styled from './StyleDropDownList';
 
-function DropDownList({ onNameClick, onNewestClick, sorted }) {
+type DropDownTypes = {
+  onNameClick : () => void;
+  onNewestClick : () => void;
+  sorted : string;
+}
+
+function DropDownList({ onNameClick, onNewestClick, sorted } : DropDownTypes) {
   return (
     <Styled.Ul>
       <li>
         <Styled.Button
           onClick={onNameClick}
-          $select={sorted === 'name' ? 'true' : 'false'}
+          select={sorted === 'name' ? 'true' : 'false'}
         >
           이름순
         </Styled.Button>
@@ -14,7 +20,7 @@ function DropDownList({ onNameClick, onNewestClick, sorted }) {
       <li>
         <Styled.Button
           onClick={onNewestClick}
-          $select={sorted === 'time' ? 'true' : 'false'}
+          select={sorted === 'time' ? 'true' : 'false'}
         >
           최신순
         </Styled.Button>

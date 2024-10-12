@@ -4,6 +4,7 @@ import { getLocalStorage } from 'utils/localStorage';
 import { getSubjects } from 'api/api';
 import { InputField, ButtonBox } from 'components';
 import * as Style from './StyleCheckAccount';
+import { SubjectDataType } from 'pages/HomePage';
 
 const CheckAccount = () => {
   const navigate = useNavigate();
@@ -15,9 +16,9 @@ const CheckAccount = () => {
   //사용자들 정보 모두 가져와서 저장
   const handleAllList = async () => {
     try {
-      const result = await Promise.all([getSubjects(null, 9999, 0)]);
-      const list = [];
-      result[0].results.map((data) => list.push(data.name));
+      const result = await Promise.all([getSubjects({id : null, limit : 9999, offset : '0'})]);
+      const list : string[] = [];
+      result[0].results.map((data : SubjectDataType) => list.push(data.name));
       setAllList((prevArray) => [...prevArray, list]);
     } catch (error) {
       console.log(error);
@@ -32,7 +33,7 @@ const CheckAccount = () => {
     } else {
       try {
         const storedId = getLocalStorage(name);
-        const { id: userId } = await getSubjects(storedId);
+        const { id: userId } = await getSubjects({id : storedId});
         //내 계정이 아닌 값 입력하면 넘어가지 않도록
         if (userId === undefined) {
           setIsError(true);
@@ -56,7 +57,7 @@ const CheckAccount = () => {
     setIsError(false);
   }, [name]);
 
-  const handleInputChange = (name) => {
+  const handleInputChange = (name : string) => {
     setName(name);
   };
 

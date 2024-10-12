@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const ToggleContainer = styled.div`
+export const ToggleContainer = styled.div<{mobile : 'mobile' | 'none'}>`
   position: relative;
   left: 47%;
   cursor: pointer;
-  display: ${({ $mobile }) => $mobile === 'mobile' && 'none'};
+  display: ${({ mobile }) => mobile === 'mobile' && 'none'};
 
   @media (max-width: 767px) {
     display: unset;
@@ -14,19 +14,19 @@ export const ToggleContainer = styled.div`
   }
 `;
 
-export const ToggleBox = styled.div`
+export const ToggleBox = styled.div<{isOn : boolean}>`
   width: 50px;
   height: 24px;
   border-radius: 30px;
-  background-color: ${({ $isOn }) => ($isOn ? '#942920' : 'var(--brown20)')};
-  ${({ $isOn }) => $isOn && `transition: 0.5s`};
+  background-color: ${({ isOn }) => (isOn ? '#942920' : 'var(--brown20)')};
+  ${({ isOn }) => isOn && `transition: 0.5s`};
   transition: 0.5s;
 `;
 
-export const ToggleCircle = styled.div`
+export const ToggleCircle = styled.div<{isOn : boolean}>`
   position: absolute;
   top: 1px;
-  ${({ $isOn }) => ($isOn ? 'right: 1px' : 'left: 1px')};
+  ${({ isOn }) => (isOn ? 'right: 1px' : 'left: 1px')};
   width: 22px;
   height: 22px;
   border-radius: 50%;

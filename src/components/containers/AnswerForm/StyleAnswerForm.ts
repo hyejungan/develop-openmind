@@ -57,7 +57,7 @@ export const Form = styled.form`
   }
 `;
 
-export const Button = styled(ButtonBox)`
+export const Button = styled(ButtonBox)<{active : boolean}>`
   margin-top: 8px;
   width: 100%;
   height: 44px;
@@ -65,6 +65,6 @@ export const Button = styled(ButtonBox)`
   border: none;
   color: #fff;
   background-color: ${(props) =>
-    props.$active ? `var(--brown40)` : `var(--brown30)`};
-  cursor: ${({ $active }) => $active === false && `unset`};
+    props.active ? `var(--brown40)` : `var(--brown30)`};
+  cursor: ${({ active }) => active === false && `unset`};
 `;

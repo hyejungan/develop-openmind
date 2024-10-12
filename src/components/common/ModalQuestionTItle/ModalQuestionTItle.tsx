@@ -2,11 +2,24 @@ import { ReactComponent as Message } from 'assets/icon/messages.svg';
 import { ReactComponent as CloseButton } from 'assets/icon/close.svg';
 import * as Styled from './StyleModalQuestionTitle';
 
-const ModalQuestionTitle = ({ children, option, closeModal }) => {
+export type OptionTypes = {
+  center ?: boolean;
+  smallContainer ?: boolean;
+  visible ?: boolean;
+  filter ?: boolean;
+}
+
+type ModalQuestionTitleTypes = {
+  children : React.ReactNode;
+  option : OptionTypes;
+  closeModal : () => void;
+}
+
+const ModalQuestionTitle = ({ children, option, closeModal } : ModalQuestionTitleTypes) => {
   return (
     <>
-      <Styled.TitleBox $option={option}>
-        <Styled.Title $option={option}>
+      <Styled.TitleBox option={option}>
+        <Styled.Title option={option}>
           {option.visible && (
             <Message width={28} height={28} fill={'var(--gray60)'} />
           )}

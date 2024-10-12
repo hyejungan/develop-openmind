@@ -5,22 +5,30 @@ import { ReactComponent as ArrowLeft } from 'assets/double-arrow-left.svg';
 import { ReactComponent as ArrowRight } from 'assets/double-arrow-right.svg';
 import * as Styled from './StylePageButton';
 
-const Pagination = ({ total, onClick, limit, width, sorted }) => {
+type PaginationTypes = {
+  total : number;
+  onClick : React.Dispatch<React.SetStateAction<number>>;
+  limit: number;
+  width : number;
+  sorted : string; //TODO : QuestionListPage 모듈의 querystring 확인하고 type strict하게 변경해주기
+}
+
+const Pagination = ({ total, onClick, limit, width, sorted } : PaginationTypes) => {
   const location = useLocation();
-  const pageNum = location.pathname.split('/')[2];
-  const [num, setNum] = useState(+pageNum);
+  const pageNum = +location.pathname.split('/')[2];
+  const [num, setNum] = useState(pageNum);
   const TOTAL_PAGE = Math.ceil(total / limit);
 
   let arrLen = width > 767 ? 7 : 5;
   let pageArr = createPageArray(TOTAL_PAGE, pageNum, arrLen);
 
-  const handleButtonClick = (num) => {
+  const handleButtonClick = (num : number) => {
     onClick(limit * (num - 1));
     setNum(num);
   };
   useEffect(() => {
-    onClick(limit * (Number(pageNum) - 1));
-    setNum(+pageNum);
+    onClick(limit * (pageNum - 1));
+    setNum(pageNum);
   }, [location]);
 
   return (
@@ -35,7 +43,7 @@ const Pagination = ({ total, onClick, limit, width, sorted }) => {
           <Link to={`/list/${item}/${sorted}`} key={index}>
             <Styled.PageButton
               onClick={() => handleButtonClick(item)}
-              $select={num === item ? 'selected' : 'unselected'}
+              select={num === item ? 'selected' : 'unselected'}
             >
               {String(item)}
             </Styled.PageButton>

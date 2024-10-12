@@ -5,9 +5,11 @@ import Snowfall from 'react-snowfall';
 import { StyledGlobal } from 'style/StyleGlobal';
 import THEME from 'style/theme';
 
+type ThemeKeys = keyof typeof THEME;
+
 const App = () => {
   const initTheme = localStorage.getItem('theme') ?? 'basic';
-  const [theme, setTheme] = useState(THEME[initTheme]);
+  const [theme, setTheme] = useState<typeof THEME[ThemeKeys]>(THEME[initTheme as ThemeKeys]);
 
   return (
     <>

@@ -4,7 +4,7 @@
 
 import styled from 'styled-components';
 
-export const NavBarContainer = styled.div`
+export const NavBarContainer = styled.div<{location : string}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@ export const NavBarContainer = styled.div`
   }
 
   @media (max-width: 767px) {
-    display: ${({ $location }) => ($location === 'homepage' ? `none` : `flex`)};
+    display: ${({ location }) => (location === 'homepage' ? `none` : `flex`)};
     flex-direction: column;
     gap: 15px;
   }

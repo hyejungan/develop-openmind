@@ -1,12 +1,12 @@
 import { styled } from 'styled-components';
 
 const FONT_COLOR = {
-  false: `var(--gray40)`,
+  gray: `var(--gray40)`,
   blue: `var(--blue)`,
   red: `var(--red)`,
 };
 
-export const Container = styled.button`
+export const Container = styled.button<{active : 'gray' | 'blue' | 'red'}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@ export const Container = styled.button`
   cursor: pointer;
 
   span {
-    color: ${({ $active }) => FONT_COLOR[$active] || 'var(--gray40)'};
+    color: ${({ active }) => FONT_COLOR[active] || 'var(--gray40)'};
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 18px;

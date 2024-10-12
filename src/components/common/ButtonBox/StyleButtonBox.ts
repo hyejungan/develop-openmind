@@ -18,9 +18,9 @@ export const ButtonBox = styled.button`
   }
 `;
 
-export const ArrowRight = styled.div`
-  background-image: ${({ $color }) =>
-    $color === 'brown'
+export const ArrowRight = styled.div<{color : 'brown' | 'white'}>`
+  background-image: ${({ color }) =>
+    color === 'brown'
       ? `url(${arrowRightBrownImg})`
       : `url(${arrowRightWhiteImg})`};
   background-position: center;

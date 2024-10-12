@@ -5,31 +5,37 @@ import { ReactComponent as ArrowUp } from 'assets/icon/arrow-up.svg';
 import { DropDownList } from 'components';
 import * as Styled from './StyleDropDown';
 
-function DropDown({ offset, limit, sorted }) {
+type DropDownTypes = {
+  offset : number;
+  limit : number;
+  sorted : string;
+}
+
+function DropDown({ offset, limit, sorted } : DropDownTypes) {
   const divRef = useRef();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState('false');
+  const [isOpen, setIsOpen] = useState(false);
 
   //드롭다운 버튼 클릭
   const handleDropDownClick = () => {
-    if (isOpen === 'false') setIsOpen('true');
-    else setIsOpen('false');
+    if (isOpen === false) setIsOpen(true);
+    else setIsOpen(false);
   };
 
   //드롭다운 리스트 중 하나 선택
   const handleNameClick = () => {
-    setIsOpen('false');
+    setIsOpen(false);
     navigate(`/list/${Math.floor(offset / limit) + 1}/name`);
   };
 
   const handleNewestClick = () => {
-    setIsOpen('false');
+    setIsOpen(false);
     navigate(`/list/${Math.floor(offset / limit) + 1}/time`);
   };
 
-  const handleOutsideClick = (e) => {
+  const handleOutsideClick = (e : MouseEvent) => {
     if (e.target !== divRef.current) {
-      setIsOpen('false');
+      setIsOpen(false);
     }
   };
 
@@ -42,15 +48,15 @@ function DropDown({ offset, limit, sorted }) {
 
   return (
     <Styled.Container>
-      <Styled.Div onClick={handleDropDownClick} $status={isOpen} ref={divRef}>
+      <Styled.Div onClick={handleDropDownClick} status={isOpen} ref={divRef}>
         {sorted === 'time' ? '최신순' : '이름순'}
-        {isOpen === 'true' ? (
+        {isOpen === true ? (
           <ArrowUp width="14" height="14" fill="var(--gray60)" />
         ) : (
           <ArrowDown
             onClick={(e) => {
               e.stopPropagation();
-              setIsOpen('true');
+              setIsOpen(true);
             }}
             width="14"
             height="14"
@@ -58,7 +64,7 @@ function DropDown({ offset, limit, sorted }) {
           />
         )}
       </Styled.Div>
-      {isOpen === 'true' && (
+      {isOpen === true && (
         <DropDownList
           onNameClick={handleNameClick}
           onNewestClick={handleNewestClick}

@@ -1,12 +1,12 @@
-const findKeyByValue = (object, name) => {
+const findKeyByValue = (object : any, name : string) => {
   return Object.keys(object).find((key) => object[key] === name);
 };
 
-const existKeyById = (object, id) => {
+const existKeyById = (object: any, id: string) => {
   return Object.keys(object).includes(id);
 };
 
-export const deleteLocalStorage = (id) => {
+export const deleteLocalStorage = (id : string) => {
   const userObject = { ...JSON.parse(localStorage.getItem('user')) };
   delete userObject[id];
 
@@ -18,7 +18,7 @@ export const deleteLocalStorage = (id) => {
   }
 };
 
-export const setLocalStorage = (id, name) => {
+export const setLocalStorage = (id: string, name : number) => {
   // localStorage에 user property 값이 없을 때,
   if (!localStorage.getItem('user')) {
     localStorage.setItem('user', JSON.stringify({ [id]: name }));
@@ -34,7 +34,7 @@ export const setLocalStorage = (id, name) => {
   }
 };
 
-export const getLocalStorage = (name) => {
+export const getLocalStorage = (name : string) => {
   const userInfo = localStorage.getItem('user');
   let userId;
   if (!userInfo) {
@@ -63,7 +63,7 @@ export const checkLocalStorage = () => {
   return userId;
 };
 
-export const checkLocalStorageById = (id) => {
+export const checkLocalStorageById = (id : string) => {
   const userInfo = localStorage.getItem('user');
   let userId;
   if (!userInfo) {

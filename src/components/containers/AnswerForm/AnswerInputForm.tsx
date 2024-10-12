@@ -1,10 +1,25 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProfileImage, InputTextArea } from 'components';
 import { postAnswer, putAnswer } from 'api/api';
 import * as Styled from './StyleAnswerForm';
+import { CardSectionAnswerType } from '../FeedCard/FeedCardSection';
 
-const AnswerInputForm = ({ data }) => {
-  const [
+interface AnswerInputFormType {
+  isModify : boolean,
+  setIsModify : React.Dispatch<React.SetStateAction<boolean>>,
+  subjectImg : string,
+  subjectName: string,
+  questionId : number,
+  answer : CardSectionAnswerType,
+  setAnswer : React.Dispatch<React.SetStateAction<CardSectionAnswerType>>,
+}
+
+type AnswerInputFormDataTypes = {
+  data : AnswerInputFormType;
+}
+
+const AnswerInputForm = ({ data } : AnswerInputFormDataTypes) => {
+  const {
     isModify,
     setIsModify,
     subjectImg,
@@ -12,11 +27,11 @@ const AnswerInputForm = ({ data }) => {
     questionId,
     answer,
     setAnswer,
-  ] = data;
+   } = data;
   const [value, setValue] = useState('');
   const [active, setActive] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const formData = JSON.stringify({
@@ -25,10 +40,10 @@ const AnswerInputForm = ({ data }) => {
       });
       // 현재 답변이 있는 상황, 없는 상황에 따라 put,post로 나눔
       if (!answer) {
-        const result = await postAnswer(questionId, formData);
+        const result = await postAnswer({id : questionId, formData});
         setAnswer(result);
       } else {
-        const result = await putAnswer(answer.id, formData);
+        const result = await putAnswer({id : answer.id, formData});
         setAnswer((prev) => ({
           ...prev,
           ...result,
@@ -42,7 +57,7 @@ const AnswerInputForm = ({ data }) => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
     setActive(inputValue.trim() !== '');
@@ -64,7 +79,7 @@ const AnswerInputForm = ({ data }) => {
         </Styled.AnswerProfile>
         <Styled.Form onSubmit={handleSubmit}>
           <InputTextArea onChange={handleInputChange} value={value} />
-          <Styled.Button disabled={!active} $active={active}>
+          <Styled.Button disabled={!active} active={active}>
             {active ? (isModify ? `수정 완료` : `답변 완료`) : ``}
           </Styled.Button>
         </Styled.Form>

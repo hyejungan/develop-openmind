@@ -23,14 +23,14 @@ export const Form = styled.form`
   }
 `;
 
-export const Button = styled(ButtonBox)`
+export const Button = styled(ButtonBox)<{active : boolean}>`
   margin-top: 8px;
   width: 100%;
   height: 44px;
   font-size: 1.3rem;
   border: none;
   color: #fff;
-  cursor: ${({ $active }) => !$active && `default`};
-  background-color: ${({ $active, theme }) =>
-    $active ? `${theme.button.button2}` : `${theme.button.button4}`};
+  cursor: ${({ active }) => !active && `default`};
+  background-color: ${({ active, theme }) =>
+    active ? `${theme.button.button2}` : `${theme.button.button4}`};
 `;

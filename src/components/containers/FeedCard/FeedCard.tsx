@@ -7,8 +7,14 @@ import {
 } from 'components';
 import { timeForToday } from 'utils/moment';
 import * as Styled from './StyleFeedCard';
+import { getCardSectionType } from './FeedCardSection';
 
-const FeedCard = ({ data, subjectData }) => {
+type FeedCardTypes = {
+  data : getCardSectionType;
+  subjectData : string[];
+}
+
+const FeedCard = ({ data, subjectData } : FeedCardTypes) => {
   const { id: questionId, content, like, dislike, createdAt, answer } = data;
   const [subjectName, subjectImg] = subjectData;
 

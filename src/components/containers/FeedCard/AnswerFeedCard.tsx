@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   IncompleteBadge,
   CompleteBadge,
@@ -11,8 +11,18 @@ import {
 import { timeForToday } from 'utils/moment';
 import { More } from 'components';
 import * as Styled from './StyleAnswerFeedCard';
+import { getCardSectionType } from './FeedCardSection';
 
-function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData }) {
+type AnswerFeedCardTypes = {
+  data : getCardSectionType;
+  subjectData : string[];
+  setTotal : React.Dispatch<React.SetStateAction<number>>;
+  setQuestionData : React.Dispatch<React.SetStateAction<{
+    data: any[];
+}>>;
+}
+
+function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData } : AnswerFeedCardTypes) {
   const {
     id: questionId,
     content,
@@ -52,7 +62,7 @@ function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData }) {
       {answer ? ( // 답변이 있다면?
         isModify ? ( // 수정하기 버튼을 누른 상태라면?
           <AnswerInputForm // 수정버튼 누른 상태-> input 폼 보여주기
-            data={[
+            data={{
               isModify,
               setIsModify,
               subjectImg,
@@ -60,7 +70,7 @@ function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData }) {
               questionId,
               answer,
               setAnswer,
-            ]}
+            }}
           />
         ) : (
           <AnswerForm // 수정버튼 누르지 않은 상태-> 답변 보여주기
@@ -71,7 +81,7 @@ function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData }) {
         )
       ) : (
         <AnswerInputForm // 미답변 상태라면 input 폼 보여주기
-          data={[
+          data={{
             isModify,
             setIsModify,
             subjectImg,
@@ -79,7 +89,7 @@ function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData }) {
             questionId,
             answer,
             setAnswer,
-          ]}
+          }}
         />
       )}
       <Styled.Footer>

@@ -7,15 +7,15 @@ export const PaginationBox = styled.div`
   gap: 5px;
 `;
 
-export const PageButton = styled.button`
+export const PageButton = styled.button<{select : 'selected' | 'unselected'}>`
   width: 4rem;
   height: 4rem;
   text-align: center;
-  font-size: ${({ $select }) => ($select === 'selected' ? `2.3rem` : `2rem`)};
+  font-size: ${({ select }) => (select === 'selected' ? `2.3rem` : `2rem`)};
   font-family: Actor;
   line-height: 125%;
-  color: ${({ $select, theme }) =>
-    $select === 'selected' ? `${theme.color.color3}` : `${theme.color.color4}`};
+  color: ${({ select, theme }) =>
+    select === 'selected' ? `${theme.color.color3}` : `${theme.color.color4}`};
 
   &:hover {
     color: ${({ theme }) => theme.color.color5};

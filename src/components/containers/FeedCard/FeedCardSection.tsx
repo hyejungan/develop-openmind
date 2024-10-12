@@ -5,13 +5,41 @@ import { ReactComponent as SantaImg } from 'assets/santa.svg';
 import * as Styled from './StyleFeedCardSection';
 import { ThemeContext } from 'styled-components';
 
+export interface CardSectionAnswerType {
+  id : number;
+  questionId : number;
+  content : string;
+  isRejected : boolean;
+  createdAt : string;
+}
+
+export interface getCardSectionType {
+  id : number;
+  subjectId : number;
+  content : string;
+  like : number;
+  dislike : number;
+  createdAt : string;
+  answer : CardSectionAnswerType;
+}
+
+type FeedCardSectionTypes = {
+  total : any;
+  data : getCardSectionType[];
+  subjectData : string[];
+  setTotal : React.Dispatch<any>;
+  setQuestionData : React.Dispatch<React.SetStateAction<{
+    data: any[];
+}>>;
+}
+
 const FeedCardSection = ({
   total,
   data,
   subjectData,
   setTotal,
   setQuestionData,
-}) => {
+} : FeedCardSectionTypes) => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -27,7 +55,7 @@ const FeedCardSection = ({
         </Styled.CountContent>
       </Styled.CountContainer>
       {total ? null : <NoQuestionBox />}
-      {data.map((data) => {
+      {data.map((data : getCardSectionType ) => {
         return (
           <AnswerFeedCard
             key={data.id}

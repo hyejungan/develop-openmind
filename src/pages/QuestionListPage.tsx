@@ -15,6 +15,13 @@ import useModal from 'hooks/useModal';
 import { checkLocalStorage } from 'utils/localStorage';
 import * as Styled from './StyleQuestionListPage';
 
+type GetSubjectsTypes = {
+  id: string | null;
+  limit: number;
+  offset: string;
+  sort: string;
+};
+
 const QuestionListPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,12 +37,12 @@ const QuestionListPage = () => {
     data: [],
   });
 
-  const handleCardSection = async (...args) => {
+  const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
     setIsLoading(true);
     try {
       const [result, total] = await Promise.all([
-        getSubjects(...args),
-        getSubjects(null, 9999, 0),
+        getSubjects({...args}),
+        getSubjects({id : null, limit : 9999, offset : '0'}),
       ]);
       const { results: subjectData } = result;
       const { count } = total;
@@ -63,13 +70,13 @@ const QuestionListPage = () => {
 
   const handleNavClick = () => {
     if (checkLocalStorage()) {
-      openModal(true);
+      openModal();
     } else {
       navigate('/');
     }
   };
 
-  const handleRedirect = (queryString) => {
+  const handleRedirect = (queryString: string) => {
     if (queryString.trim() !== 'name' && queryString.trim() !== 'time') {
       navigate(`/${queryString}`);
     }
@@ -77,7 +84,7 @@ const QuestionListPage = () => {
 
   useEffect(() => {
     handleRedirect(sorted);
-    handleCardSection(null, limit, offset, sorted);
+    handleCardSection({id : null, limit, offset : offset.toString(), sort : sorted});
   }, [location, offset, limit]);
 
   useEffect(() => {

@@ -31,10 +31,10 @@ const QuestionFeedPage = () => {
   });
 
   //질문 목록 데이터 호출
-  const handleFeedCardSection = async (id, limit, offset) => {
+  const handleFeedCardSection = async (id : string, limit : number, offset : React.MutableRefObject<number>) => {
     setIsLoading(true);
     try {
-      const result = await getSubjectsQuestion(id, limit, offset.current);
+      const result = await getSubjectsQuestion({id, limit, offset : offset.current});
       const { count, next, results: questionData } = result;
       setQuestionData((prevData) => ({
         data: [...prevData.data, ...questionData],
@@ -50,7 +50,7 @@ const QuestionFeedPage = () => {
     }
   };
 
-  const observeCallback = (entries) => {
+  const observeCallback = (entries : IntersectionObserverEntry[]) => {
     if (isLoading) return;
 
     entries.forEach((entry) => {

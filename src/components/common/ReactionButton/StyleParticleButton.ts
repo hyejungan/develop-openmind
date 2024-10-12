@@ -1,6 +1,11 @@
 import { styled } from 'styled-components';
 
-export const Shape = styled.img`
+export const Shape = styled.img<{
+  scale: number;
+  sec: number;
+  x: number;
+  y: number;
+}>`
   z-index: 15;
   width: 40px;
   height: 40px;

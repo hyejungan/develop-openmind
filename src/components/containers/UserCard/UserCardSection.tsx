@@ -1,7 +1,12 @@
 import { UserCard } from 'components';
 import * as Styled from './StyleUserCard';
+import { SubjectDataType } from 'pages/HomePage';
 
-const UserCardSection = ({ data }) => {
+type UserCardSectionData = {
+  data : SubjectDataType[];
+}
+
+const UserCardSection = ({ data } : UserCardSectionData) => {
   return (
     <Styled.Section>
       {data.map((data) => {
@@ -10,9 +15,9 @@ const UserCardSection = ({ data }) => {
           <UserCard
             key={id}
             id={id}
-            src={imageSource}
+            imageSource={imageSource}
             name={name}
-            count={questionCount}
+            questionCount={questionCount}
           />
         );
       })}

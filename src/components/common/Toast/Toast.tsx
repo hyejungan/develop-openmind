@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import * as Styled from './StyleToast';
 
-export default function Toast({ setStatus, children }) {
+type ToastTypes = {
+  setStatus : React.Dispatch<React.SetStateAction<boolean>>;
+  children : React.ReactNode;
+}
+
+export default function Toast({ setStatus, children } : ToastTypes) {
   useEffect(() => {
     setTimeout(() => {
       setStatus(false);

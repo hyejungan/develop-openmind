@@ -1,8 +1,15 @@
 import { ProfileImage } from 'components';
 import { timeForToday } from 'utils/moment';
 import * as Styled from './StyleAnswerForm';
+import { CardSectionAnswerType } from '../FeedCard/FeedCardSection';
 
-const AnswerForm = ({ subjectImg, subjectName, data }) => {
+type AnswerFormTypes = {
+  subjectImg : string;
+  subjectName : string;
+  data : CardSectionAnswerType;
+}
+
+const AnswerForm = ({ subjectImg, subjectName, data } : AnswerFormTypes) => {
   const { content, isRejected, createdAt } = data;
   return (
     <Styled.AnswerContainer>

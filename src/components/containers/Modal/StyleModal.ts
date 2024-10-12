@@ -7,9 +7,9 @@ const placeholderRotate = keyframes`
   }
 `;
 
-export const ModalBackground = styled.div`
-  background-color: ${({ $back }) =>
-    $back === 'noBG' ? `rgba(0, 0, 0, 0)` : `rgba(0, 0, 0, 0.4)`};
+export const ModalBackground = styled.div<{back ?:'noBG'}>`
+  background-color: ${({ back }) =>
+    back === 'noBG' ? `rgba(0, 0, 0, 0)` : `rgba(0, 0, 0, 0.4)`};
   width: 100vw;
   height: 100vh;
   z-index: 9000;
@@ -33,7 +33,7 @@ export const Spinner = styled.div`
   background-position: center;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<{smallContainer : boolean}>`
   display: flex;
   flex-direction: column;
   z-index: 9999;
@@ -44,8 +44,8 @@ export const Container = styled.div`
   background-color: var(--gray10);
   box-shadow: var(--shadow-3pt);
 
-  ${({ $smallContainer }) =>
-    $smallContainer
+  ${({ smallContainer }) =>
+    smallContainer
       ? `
     justify-content: space-between;
     gap: 10px;
