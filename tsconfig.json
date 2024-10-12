@@ -9,8 +9,8 @@
     "outDir": "./dist",
     "allowJs": true,
     "esModuleInterop": true,
-    "allowImportingTsExtensions" : true,
-    "noEmit" : true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "moduleResolution": "Node",
     "jsx": "react-jsx",
     "types": ["react", "react-dom"]

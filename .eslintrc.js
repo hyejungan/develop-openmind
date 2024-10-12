@@ -19,7 +19,7 @@ module.exports = {
     {
       env: {
         node: true,
-        browser : true,
+        browser: true,
       },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
