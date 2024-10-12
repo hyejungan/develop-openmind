@@ -11,8 +11,8 @@ const SIZES = {
 
 export const Container = styled.div<{
   size: 'xLarge' | 'mediumLarge' | 'mediumSmall' | 'xSmall';
-  mobileSize: 'large' | 'mediumSmall';
-  filter: boolean;
+  mobile_size: 'large' | 'mediumSmall';
+  filter: string;
 }>`
   width: ${({ size }) => (size ? SIZES[size] : SIZES['mediumLarge'])}px;
   height: ${({ size }) => (size ? SIZES[size] : SIZES['mediumLarge'])}px;
@@ -27,10 +27,10 @@ export const Container = styled.div<{
   }
 
   @media (max-width: 767px) {
-    width: ${({ mobileSize }) =>
-      mobileSize ? SIZES[mobileSize] : SIZES['mediumSmall']}px;
-    height: ${({ mobileSize }) =>
-      mobileSize ? SIZES[mobileSize] : SIZES['mediumSmall']}px;
+    width: ${({ mobile_size }) =>
+      mobile_size ? SIZES[mobile_size] : SIZES['mediumSmall']}px;
+    height: ${({ mobile_size }) =>
+      mobile_size ? SIZES[mobile_size] : SIZES['mediumSmall']}px;
   }
 `;
 

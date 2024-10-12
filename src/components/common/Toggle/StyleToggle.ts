@@ -14,19 +14,19 @@ export const ToggleContainer = styled.div<{ mobile: 'mobile' | 'none' }>`
   }
 `;
 
-export const ToggleBox = styled.div<{ isOn: boolean }>`
+export const ToggleBox = styled.div<{ ison: string }>`
   width: 50px;
   height: 24px;
   border-radius: 30px;
-  background-color: ${({ isOn }) => (isOn ? '#942920' : 'var(--brown20)')};
-  ${({ isOn }) => isOn && `transition: 0.5s`};
+  background-color: ${({ ison }) => (ison === 'true' ? '#942920' : 'var(--brown20)')};
+  ${({ ison }) => ison === 'true' && `transition: 0.5s`};
   transition: 0.5s;
 `;
 
-export const ToggleCircle = styled.div<{ isOn: boolean }>`
+export const ToggleCircle = styled.div<{ ison: string }>`
   position: absolute;
   top: 1px;
-  ${({ isOn }) => (isOn ? 'right: 1px' : 'left: 1px')};
+  ${({ ison }) => (ison === 'true' ? 'right: 1px' : 'left: 1px')};
   width: 22px;
   height: 22px;
   border-radius: 50%;

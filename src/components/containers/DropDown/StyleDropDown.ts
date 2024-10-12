@@ -5,7 +5,7 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const Div = styled.div<{ status: boolean }>`
+export const Div = styled.div<{ status: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,12 +13,12 @@ export const Div = styled.div<{ status: boolean }>`
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid
-    ${({ status }) => (status === false ? `var(--gray40)` : `var(--gray60)`)};
+    ${({ status }) => (status === 'false' ? `var(--gray40)` : `var(--gray60)`)};
   background: var(--gray10);
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.8rem;
   color: ${({ status }) =>
-    status === false ? `var(--gray40)` : `var(--gray60)`};
+    status === 'false' ? `var(--gray40)` : `var(--gray60)`};
   cursor: pointer;
 `;

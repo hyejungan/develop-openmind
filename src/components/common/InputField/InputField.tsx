@@ -6,14 +6,14 @@ type InputFieldPropsTypes = {
 };
 
 const InputField: React.FC<InputFieldPropsTypes> = ({ onChange }) => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState('false');
 
   const handleInputFocus = () => {
-    setIsFocused(true);
+    setIsFocused('true');
   };
 
   const handleInputBlur = () => {
-    setIsFocused(false);
+    setIsFocused('false');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -61,7 +61,7 @@ function PostHeader({
             size="xLarge"
             mobileSize="large"
             onClick={isAnswerPage ? openModal : closeModal}
-            filter={isAnswerPage && filter}
+            filter={isAnswerPage && filter ? 'true' : 'false'}
           />
           <Styled.Name>{subjectName}</Styled.Name>
           <ButtonShare name={subjectName} image={subjectImg} />

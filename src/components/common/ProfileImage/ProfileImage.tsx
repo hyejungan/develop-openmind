@@ -5,7 +5,7 @@ type ProfileImageTypes = {
   size?: 'xLarge' | 'mediumLarge' | 'mediumSmall' | 'xSmall';
   mobileSize?: 'large' | 'mediumSmall';
   onClick?: () => void;
-  filter?: boolean;
+  filter?: string;
 };
 
 function ProfileImage({
@@ -18,7 +18,7 @@ function ProfileImage({
   return (
     <Styled.Container
       size={size}
-      mobileSize={mobileSize}
+      mobile_size={mobileSize}
       onClick={onClick}
       filter={filter}
     >

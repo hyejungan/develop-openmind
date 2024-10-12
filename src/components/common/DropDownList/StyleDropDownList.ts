@@ -13,7 +13,7 @@ export const Ul = styled.ul<{ type?: 'more' | '' }>`
 `;
 
 export const Button = styled.button<{
-  select?: 'true' | 'false';
+  select?: string;
   type?: string;
 }>`
   align-self: stretch;
