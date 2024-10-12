@@ -7,7 +7,7 @@ export const PaginationBox = styled.div`
   gap: 5px;
 `;
 
-export const PageButton = styled.button<{select : 'selected' | 'unselected'}>`
+export const PageButton = styled.button<{ select: 'selected' | 'unselected' }>`
   width: 4rem;
   height: 4rem;
   text-align: center;

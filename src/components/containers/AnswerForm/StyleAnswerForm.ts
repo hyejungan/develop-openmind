@@ -57,7 +57,7 @@ export const Form = styled.form`
   }
 `;
 
-export const Button = styled(ButtonBox)<{active : boolean}>`
+export const Button = styled(ButtonBox)<{ active: boolean }>`
   margin-top: 8px;
   width: 100%;
   height: 44px;

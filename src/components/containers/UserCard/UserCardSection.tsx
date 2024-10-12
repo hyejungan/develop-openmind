@@ -3,10 +3,10 @@ import * as Styled from './StyleUserCard';
 import { SubjectDataType } from 'pages/HomePage';
 
 type UserCardSectionData = {
-  data : SubjectDataType[];
-}
+  data: SubjectDataType[];
+};
 
-const UserCardSection = ({ data } : UserCardSectionData) => {
+const UserCardSection = ({ data }: UserCardSectionData) => {
   return (
     <Styled.Section>
       {data.map((data) => {

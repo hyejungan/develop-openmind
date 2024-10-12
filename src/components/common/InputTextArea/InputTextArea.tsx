@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import * as Styled from './StyleInputTextArea.js';
+import * as Styled from './StyleInputTextArea';
 
 type InputTextAreaTypes = {
-  value : string;
-  onChange : React.ChangeEventHandler<HTMLTextAreaElement>
-}
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+};
 
-const InputTextArea = ({ value, onChange } : InputTextAreaTypes) => {
+const InputTextArea = ({ value, onChange }: InputTextAreaTypes) => {
   const [focused, setFocused] = useState(false);
 
   const handleInputFocus = () => {

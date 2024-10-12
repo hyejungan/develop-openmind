@@ -14,11 +14,11 @@ const StyledButtonText = styled(Styled.ButtonText)`
 `;
 
 export type ButtonBoxType = {
-  onClick : React.MouseEventHandler;
-  children : React.ReactNode;
-}
+  onClick: React.MouseEventHandler;
+  children: React.ReactNode;
+};
 
-const ButtonBox = ({ onClick, children } : ButtonBoxType) => {
+const ButtonBox = ({ onClick, children }: ButtonBoxType) => {
   return (
     <StyledButtonBox onClick={onClick}>
       <StyledButtonText>{children}</StyledButtonText>

@@ -1,5 +1,5 @@
 //Facebook
-export const shareFacebook = (sharedUrl : string) => {
+export const shareFacebook = (sharedUrl: string) => {
   window.open(
     `http://www.facebook.com/sharer/sharer.php?u=${sharedUrl}`,
     'popup',
@@ -10,7 +10,7 @@ export const shareFacebook = (sharedUrl : string) => {
 //KakaoTalk
 const { Kakao } = window;
 
-export const shareKakao = (name : string, src : string, sharedUrl : string) => {
+export const shareKakao = (name: string, src: string, sharedUrl: string) => {
   // 중복 initailization 방지, 괄호안에는 서비스 고유 키
   if (!Kakao.isInitialized()) Kakao.init('294992f2e77e06b1422d31ae80f76271');
 

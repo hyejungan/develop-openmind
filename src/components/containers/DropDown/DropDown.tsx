@@ -6,12 +6,12 @@ import { DropDownList } from 'components';
 import * as Styled from './StyleDropDown';
 
 type DropDownTypes = {
-  offset : number;
-  limit : number;
-  sorted : string;
-}
+  offset: number;
+  limit: number;
+  sorted: string;
+};
 
-function DropDown({ offset, limit, sorted } : DropDownTypes) {
+function DropDown({ offset, limit, sorted }: DropDownTypes) {
   const divRef = useRef();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,7 @@ function DropDown({ offset, limit, sorted } : DropDownTypes) {
     navigate(`/list/${Math.floor(offset / limit) + 1}/time`);
   };
 
-  const handleOutsideClick = (e : MouseEvent) => {
+  const handleOutsideClick = (e: MouseEvent) => {
     if (e.target !== divRef.current) {
       setIsOpen(false);
     }

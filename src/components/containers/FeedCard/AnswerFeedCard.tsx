@@ -14,15 +14,22 @@ import * as Styled from './StyleAnswerFeedCard';
 import { getCardSectionType } from './FeedCardSection';
 
 type AnswerFeedCardTypes = {
-  data : getCardSectionType;
-  subjectData : string[];
-  setTotal : React.Dispatch<React.SetStateAction<number>>;
-  setQuestionData : React.Dispatch<React.SetStateAction<{
-    data: any[];
-}>>;
-}
+  data: getCardSectionType;
+  subjectData: string[];
+  setTotal: React.Dispatch<React.SetStateAction<number>>;
+  setQuestionData: React.Dispatch<
+    React.SetStateAction<{
+      data: any[];
+    }>
+  >;
+};
 
-function AnswerFeedCard({ data, subjectData, setTotal, setQuestionData } : AnswerFeedCardTypes) {
+function AnswerFeedCard({
+  data,
+  subjectData,
+  setTotal,
+  setQuestionData,
+}: AnswerFeedCardTypes) {
   const {
     id: questionId,
     content,

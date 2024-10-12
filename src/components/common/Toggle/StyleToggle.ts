@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ToggleContainer = styled.div<{mobile : 'mobile' | 'none'}>`
+export const ToggleContainer = styled.div<{ mobile: 'mobile' | 'none' }>`
   position: relative;
   left: 47%;
   cursor: pointer;
@@ -14,7 +14,7 @@ export const ToggleContainer = styled.div<{mobile : 'mobile' | 'none'}>`
   }
 `;
 
-export const ToggleBox = styled.div<{isOn : boolean}>`
+export const ToggleBox = styled.div<{ isOn: boolean }>`
   width: 50px;
   height: 24px;
   border-radius: 30px;
@@ -23,7 +23,7 @@ export const ToggleBox = styled.div<{isOn : boolean}>`
   transition: 0.5s;
 `;
 
-export const ToggleCircle = styled.div<{isOn : boolean}>`
+export const ToggleCircle = styled.div<{ isOn: boolean }>`
   position: absolute;
   top: 1px;
   ${({ isOn }) => (isOn ? 'right: 1px' : 'left: 1px')};

@@ -10,11 +10,11 @@ import * as Styled from './StyleFeedCard';
 import { getCardSectionType } from './FeedCardSection';
 
 type FeedCardTypes = {
-  data : getCardSectionType;
-  subjectData : string[];
-}
+  data: getCardSectionType;
+  subjectData: string[];
+};
 
-const FeedCard = ({ data, subjectData } : FeedCardTypes) => {
+const FeedCard = ({ data, subjectData }: FeedCardTypes) => {
   const { id: questionId, content, like, dislike, createdAt, answer } = data;
   const [subjectName, subjectImg] = subjectData;
 

@@ -4,22 +4,24 @@ import { postSubjectsQuestion } from 'api/api';
 import * as Styled from './StyleWriteQuestion';
 
 interface QuestionDataType {
-  id : number;
-  name : string;
-  imageSource : string;
-  questionCount : number;
-  createdAt : string;
+  id: number;
+  name: string;
+  imageSource: string;
+  questionCount: number;
+  createdAt: string;
 }
 
 type WriteQuestionModalType = {
-  closeModal : () => void;
-  subjectData : [subjectName : string, subjectImg : string, subjectId : string];
-  setQuestionData : React.Dispatch<React.SetStateAction<{
-    data: any[];
-}>>,
-  questionData : {data : QuestionDataType[]},
-  setTotal: React.Dispatch<any>,
-}
+  closeModal: () => void;
+  subjectData: [subjectName: string, subjectImg: string, subjectId: string];
+  setQuestionData: React.Dispatch<
+    React.SetStateAction<{
+      data: any[];
+    }>
+  >;
+  questionData: { data: QuestionDataType[] };
+  setTotal: React.Dispatch<any>;
+};
 
 const WriteQuestionModal = ({
   closeModal,
@@ -27,16 +29,16 @@ const WriteQuestionModal = ({
   setQuestionData,
   questionData,
   setTotal,
-} : WriteQuestionModalType) => {
+}: WriteQuestionModalType) => {
   const [subjectName, subjectImg, subjectId] = subjectData;
   const [value, setValue] = useState('');
   const [active, setActive] = useState(false);
 
-  const handleButtonClick = async (e : React.MouseEvent) => {
+  const handleButtonClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
       const formData = JSON.stringify({ content: `${value}` });
-      const response = await postSubjectsQuestion({id : +subjectId, formData});
+      const response = await postSubjectsQuestion({ id: +subjectId, formData });
       if (questionData.data.length) {
         setQuestionData((prevData) => {
           const { data: prevArray } = prevData;

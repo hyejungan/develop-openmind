@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Ul = styled.ul<{type ?: 'more' | ''}>`
+export const Ul = styled.ul<{ type?: 'more' | '' }>`
   position: absolute;
   width: ${({ type }) => (type === 'more' ? 90 : 79)}px;
   margin-top: 2px;
@@ -12,7 +12,10 @@ export const Ul = styled.ul<{type ?: 'more' | ''}>`
   z-index: 1;
 `;
 
-export const Button = styled.button<{select?: 'true' | 'false'; type?: string}>`
+export const Button = styled.button<{
+  select?: 'true' | 'false';
+  type?: string;
+}>`
   align-self: stretch;
   width: 100%;
   padding: 6px 16px;

@@ -21,8 +21,8 @@ interface OutletContextType {
 export interface SubjectDataType {
   id: number;
   name: string;
-  imageSource : string;
-  questionCount : number;
+  imageSource: string;
+  questionCount: number;
   createdAt?: string;
 }
 
@@ -41,9 +41,11 @@ const HomePage = () => {
   //사용자들 정보 모두 가져와서 저장
   const handleAllList = async () => {
     try {
-      const result = await Promise.all([getSubjects({id : null, limit : 9999, offset : '0'})]);
+      const result = await Promise.all([
+        getSubjects({ id: null, limit: 9999, offset: '0' }),
+      ]);
       const list: string[] = [];
-      result[0].results.map((data : SubjectDataType) => list.push(data.name));
+      result[0].results.map((data: SubjectDataType) => list.push(data.name));
       setAllList((prevArray) => [...prevArray, list]);
     } catch (error) {
       console.error(error);
@@ -64,7 +66,7 @@ const HomePage = () => {
       if (getLocalStorage(name)) {
         // localStorage에 Input에 입력한 name에 맞는 userId가 있을 때
         const storedId = getLocalStorage(name);
-        const { id: userId } = await getSubjects({id: storedId});
+        const { id: userId } = await getSubjects({ id: storedId });
         navigate(`/post/${userId}/answer`);
       } else {
         // localStorage에 userInfo가 없거나, input에 입력한 name에 맞는 userId가 없을 때
@@ -75,7 +77,9 @@ const HomePage = () => {
         } else {
           // 닉네임 중복되지 않아, 새로 만드는 경우
           const formData = JSON.stringify({ name: `${name}` });
-          const { id: userId, name: userName } = await postSubjects({formData});
+          const { id: userId, name: userName } = await postSubjects({
+            formData,
+          });
           setLocalStorage(userId, userName);
           navigate(`/post/${userId}/answer`);
         }
@@ -88,7 +92,7 @@ const HomePage = () => {
     }
   };
 
-  const handleInputChange = (name : string) => {
+  const handleInputChange = (name: string) => {
     setName(name);
   };
 

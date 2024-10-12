@@ -9,7 +9,9 @@ type ThemeKeys = keyof typeof THEME;
 
 const App = () => {
   const initTheme = localStorage.getItem('theme') ?? 'basic';
-  const [theme, setTheme] = useState<typeof THEME[ThemeKeys]>(THEME[initTheme as ThemeKeys]);
+  const [theme, setTheme] = useState<(typeof THEME)[ThemeKeys]>(
+    THEME[initTheme as ThemeKeys]
+  );
 
   return (
     <>

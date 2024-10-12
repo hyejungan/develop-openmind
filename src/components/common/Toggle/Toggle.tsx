@@ -3,11 +3,11 @@ import THEME from 'style/theme';
 import * as Styled from './StyleToggle';
 
 type ToggleTypes = {
-  setTheme : React.Dispatch<any>;
-  mobile ?: 'mobile' | 'none'
-}
+  setTheme: React.Dispatch<any>;
+  mobile?: 'mobile' | 'none';
+};
 
-const Toggle = ({ setTheme, mobile } : ToggleTypes) => {
+const Toggle = ({ setTheme, mobile }: ToggleTypes) => {
   const initTheme =
     localStorage.getItem('theme') === 'christmas' ? true : false;
   const [isOn, setIsOn] = useState(initTheme);

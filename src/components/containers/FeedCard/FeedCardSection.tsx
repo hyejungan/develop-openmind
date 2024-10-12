@@ -6,32 +6,34 @@ import * as Styled from './StyleFeedCardSection';
 import { ThemeContext } from 'styled-components';
 
 export interface CardSectionAnswerType {
-  id : number;
-  questionId : number;
-  content : string;
-  isRejected : boolean;
-  createdAt : string;
+  id: number;
+  questionId: number;
+  content: string;
+  isRejected: boolean;
+  createdAt: string;
 }
 
 export interface getCardSectionType {
-  id : number;
-  subjectId : number;
-  content : string;
-  like : number;
-  dislike : number;
-  createdAt : string;
-  answer : CardSectionAnswerType;
+  id: number;
+  subjectId: number;
+  content: string;
+  like: number;
+  dislike: number;
+  createdAt: string;
+  answer: CardSectionAnswerType;
 }
 
 type FeedCardSectionTypes = {
-  total : any;
-  data : getCardSectionType[];
-  subjectData : string[];
-  setTotal : React.Dispatch<any>;
-  setQuestionData : React.Dispatch<React.SetStateAction<{
-    data: any[];
-}>>;
-}
+  total: any;
+  data: getCardSectionType[];
+  subjectData: string[];
+  setTotal: React.Dispatch<any>;
+  setQuestionData: React.Dispatch<
+    React.SetStateAction<{
+      data: any[];
+    }>
+  >;
+};
 
 const FeedCardSection = ({
   total,
@@ -39,7 +41,7 @@ const FeedCardSection = ({
   subjectData,
   setTotal,
   setQuestionData,
-} : FeedCardSectionTypes) => {
+}: FeedCardSectionTypes) => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -55,7 +57,7 @@ const FeedCardSection = ({
         </Styled.CountContent>
       </Styled.CountContainer>
       {total ? null : <NoQuestionBox />}
-      {data.map((data : getCardSectionType ) => {
+      {data.map((data: getCardSectionType) => {
         return (
           <AnswerFeedCard
             key={data.id}

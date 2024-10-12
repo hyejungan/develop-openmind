@@ -4,7 +4,7 @@
 
 import styled from 'styled-components';
 
-export const NavBarContainer = styled.div<{location : string}>`
+export const NavBarContainer = styled.div<{ location: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;

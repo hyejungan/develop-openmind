@@ -215,6 +215,7 @@ src
 
 - intersectionObserver를 이용해 infinit scroll(무한스크롤)을 구현했고, 브라우저 엔진이 useRef 요소의 가시성 변화를 감지하여 렌더링 하도록 했습니다.
   next값이 없을때, hasNaxt를 이용해 DOM 요소가 보이지 않도록 했습니다.
+
   ```js
     const [hasNext,setHasNext] = useState(true);
     ,,,
@@ -229,6 +230,7 @@ src
     {hasNext && <Styled.ObserveTargetBox ref={target} />}
 
   ```
+
 - 질문 작성 후 모달창이 닫혔을때, 바로 폼에 적용되어 보여질 수 있도록 했습니다.
   ```js
     const formData = JSON.stringify({ content: `${value}` });

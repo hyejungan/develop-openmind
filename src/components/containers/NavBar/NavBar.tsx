@@ -7,12 +7,12 @@ import christmasLogoImg from 'assets/christmas-logo.png';
 import * as Styled from './StyleNavBar';
 
 type NavBarTypes = {
-  children : React.ReactNode;
-  onClick : React.MouseEventHandler;
-  setTheme ?: (theme : any) => void;
-}
+  children: React.ReactNode;
+  onClick: React.MouseEventHandler;
+  setTheme?: (theme: any) => void;
+};
 
-const NavBar = ({ children, onClick, setTheme } : NavBarTypes) => {
+const NavBar = ({ children, onClick, setTheme }: NavBarTypes) => {
   const location = useLocation();
   const [navProp, setNavProp] = useState('');
   const theme = useContext(ThemeContext);

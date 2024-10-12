@@ -6,12 +6,12 @@ import { deleteLocalStorage } from 'utils/localStorage';
 import * as Style from './StyleAccountForm';
 
 type AccountFormTypes = {
-  name : string;
-  image : string;
-  id : string;
-}
+  name: string;
+  image: string;
+  id: string;
+};
 
-function AccountForm({ name, image, id } : AccountFormTypes) {
+function AccountForm({ name, image, id }: AccountFormTypes) {
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: name,
@@ -29,11 +29,11 @@ function AccountForm({ name, image, id } : AccountFormTypes) {
     }));
   };
 
-  const handleUserNameChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, name: e.target.value }));
   };
 
-  const handleDeleteClick = (e : React.MouseEvent<HTMLButtonElement>) => {
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setVisible((prev) => ({
       ...prev,
@@ -42,10 +42,12 @@ function AccountForm({ name, image, id } : AccountFormTypes) {
     }));
   };
 
-  const handleDeleteAccountClick = async (e : React.MouseEvent<HTMLButtonElement>) => {
+  const handleDeleteAccountClick = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     try {
-      const response = await deleteSubjects({id});
+      const response = await deleteSubjects({ id });
       deleteLocalStorage(id);
       if (response) navigate('/');
     } catch (error) {

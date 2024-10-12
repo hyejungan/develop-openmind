@@ -4,12 +4,12 @@ import * as Styled from './StyleAnswerForm';
 import { CardSectionAnswerType } from '../FeedCard/FeedCardSection';
 
 type AnswerFormTypes = {
-  subjectImg : string;
-  subjectName : string;
-  data : CardSectionAnswerType;
-}
+  subjectImg: string;
+  subjectName: string;
+  data: CardSectionAnswerType;
+};
 
-const AnswerForm = ({ subjectImg, subjectName, data } : AnswerFormTypes) => {
+const AnswerForm = ({ subjectImg, subjectName, data }: AnswerFormTypes) => {
   const { content, isRejected, createdAt } = data;
   return (
     <Styled.AnswerContainer>

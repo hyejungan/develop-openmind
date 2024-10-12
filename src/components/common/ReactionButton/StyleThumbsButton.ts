@@ -6,7 +6,7 @@ const FONT_COLOR = {
   red: `var(--red)`,
 };
 
-export const Container = styled.button<{active : 'gray' | 'blue' | 'red'}>`
+export const Container = styled.button<{ active: 'gray' | 'blue' | 'red' }>`
   display: flex;
   justify-content: space-between;
   align-items: center;

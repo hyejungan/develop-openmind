@@ -9,8 +9,11 @@
     "outDir": "./dist",
     "allowJs": true,
     "esModuleInterop": true,
+    "allowImportingTsExtensions" : true,
+    "noEmit" : true,
     "moduleResolution": "Node",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom"]
   },
   "exclude": ["node_modules", "**/*.(spec|test).ts"],
   "include": ["./src/**/*"]

@@ -2,11 +2,11 @@ import { ReactComponent as EditIcon } from 'assets/icon/edit.svg';
 import * as Styled from './StyleButtonEdit';
 
 type ButtonEditTypes = {
-  onClick : React.MouseEventHandler;
-  isModify : Boolean;
-}
+  onClick: React.MouseEventHandler;
+  isModify: Boolean;
+};
 
-const ButtonEdit = ({ onClick, isModify } : ButtonEditTypes) => {
+const ButtonEdit = ({ onClick, isModify }: ButtonEditTypes) => {
   const modify = isModify ? `modify` : '';
   return (
     <Styled.Button onClick={onClick} $modify={modify}>

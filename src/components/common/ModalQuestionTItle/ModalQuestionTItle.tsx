@@ -3,19 +3,23 @@ import { ReactComponent as CloseButton } from 'assets/icon/close.svg';
 import * as Styled from './StyleModalQuestionTitle';
 
 export type OptionTypes = {
-  center ?: boolean;
-  smallContainer ?: boolean;
-  visible ?: boolean;
-  filter ?: boolean;
-}
+  center?: boolean;
+  smallContainer?: boolean;
+  visible?: boolean;
+  filter?: boolean;
+};
 
 type ModalQuestionTitleTypes = {
-  children : React.ReactNode;
-  option : OptionTypes;
-  closeModal : () => void;
-}
+  children: React.ReactNode;
+  option: OptionTypes;
+  closeModal: () => void;
+};
 
-const ModalQuestionTitle = ({ children, option, closeModal } : ModalQuestionTitleTypes) => {
+const ModalQuestionTitle = ({
+  children,
+  option,
+  closeModal,
+}: ModalQuestionTitleTypes) => {
   return (
     <>
       <Styled.TitleBox option={option}>

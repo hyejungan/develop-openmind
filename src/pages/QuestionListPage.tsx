@@ -41,8 +41,8 @@ const QuestionListPage = () => {
     setIsLoading(true);
     try {
       const [result, total] = await Promise.all([
-        getSubjects({...args}),
-        getSubjects({id : null, limit : 9999, offset : '0'}),
+        getSubjects({ ...args }),
+        getSubjects({ id: null, limit: 9999, offset: '0' }),
       ]);
       const { results: subjectData } = result;
       const { count } = total;
@@ -84,7 +84,12 @@ const QuestionListPage = () => {
 
   useEffect(() => {
     handleRedirect(sorted);
-    handleCardSection({id : null, limit, offset : offset.toString(), sort : sorted});
+    handleCardSection({
+      id: null,
+      limit,
+      offset: offset.toString(),
+      sort: sorted,
+    });
   }, [location, offset, limit]);
 
   useEffect(() => {

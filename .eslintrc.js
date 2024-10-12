@@ -1,4 +1,5 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es2021: true,
@@ -9,10 +10,16 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'prettier',
   ],
+  settings: {
+    react: {
+      version: 'detect', // 설치된 React 버전 자동 감지
+    },
+  },
   overrides: [
     {
       env: {
         node: true,
+        browser : true,
       },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
@@ -27,5 +34,6 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };

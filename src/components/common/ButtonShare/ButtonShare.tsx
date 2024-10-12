@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import Toast from '../Toast/Toast';
-import * as Styled from './StyleButtonShare.js';
-import * as handle from 'utils/shareSNS.js';
+import * as Styled from './StyleButtonShare.ts';
+import * as handle from 'utils/shareSNS.ts';
 import linkIcon from 'assets/link-icon.svg';
 import facebookIcon from 'assets/facebook-icon.svg';
 import kakaoIcon from 'assets/kakao-icon.svg';
 
 type ButtonShareTypes = {
-  name : string;
-  image : string;
-}
+  name: string;
+  image: string;
+};
 
-function ButtonShare({ name, image } : ButtonShareTypes) {
+function ButtonShare({ name, image }: ButtonShareTypes) {
   const [isToastOn, setIsToastOn] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
   const sharedUrl = window.location.href;
 
-  const handleCopyUrl = async (url : string) => {
+  const handleCopyUrl = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
       setIsToastOn(true);
@@ -28,7 +28,7 @@ function ButtonShare({ name, image } : ButtonShareTypes) {
     }
   };
 
-  const handleFacebook = (url : string) => {
+  const handleFacebook = (url: string) => {
     try {
       handle.shareFacebook(url);
     } catch {
@@ -37,7 +37,7 @@ function ButtonShare({ name, image } : ButtonShareTypes) {
     }
   };
 
-  const handleKakao = (name : string, image : string, url : string) => {
+  const handleKakao = (name: string, image: string, url: string) => {
     try {
       handle.shareKakao(name, image, url);
     } catch {

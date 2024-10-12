@@ -5,20 +5,20 @@ import * as Styled from './StyleAnswerForm';
 import { CardSectionAnswerType } from '../FeedCard/FeedCardSection';
 
 interface AnswerInputFormType {
-  isModify : boolean,
-  setIsModify : React.Dispatch<React.SetStateAction<boolean>>,
-  subjectImg : string,
-  subjectName: string,
-  questionId : number,
-  answer : CardSectionAnswerType,
-  setAnswer : React.Dispatch<React.SetStateAction<CardSectionAnswerType>>,
+  isModify: boolean;
+  setIsModify: React.Dispatch<React.SetStateAction<boolean>>;
+  subjectImg: string;
+  subjectName: string;
+  questionId: number;
+  answer: CardSectionAnswerType;
+  setAnswer: React.Dispatch<React.SetStateAction<CardSectionAnswerType>>;
 }
 
 type AnswerInputFormDataTypes = {
-  data : AnswerInputFormType;
-}
+  data: AnswerInputFormType;
+};
 
-const AnswerInputForm = ({ data } : AnswerInputFormDataTypes) => {
+const AnswerInputForm = ({ data }: AnswerInputFormDataTypes) => {
   const {
     isModify,
     setIsModify,
@@ -27,11 +27,11 @@ const AnswerInputForm = ({ data } : AnswerInputFormDataTypes) => {
     questionId,
     answer,
     setAnswer,
-   } = data;
+  } = data;
   const [value, setValue] = useState('');
   const [active, setActive] = useState(false);
 
-  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const formData = JSON.stringify({
@@ -40,10 +40,10 @@ const AnswerInputForm = ({ data } : AnswerInputFormDataTypes) => {
       });
       // 현재 답변이 있는 상황, 없는 상황에 따라 put,post로 나눔
       if (!answer) {
-        const result = await postAnswer({id : questionId, formData});
+        const result = await postAnswer({ id: questionId, formData });
         setAnswer(result);
       } else {
-        const result = await putAnswer({id : answer.id, formData});
+        const result = await putAnswer({ id: answer.id, formData });
         setAnswer((prev) => ({
           ...prev,
           ...result,
@@ -57,7 +57,7 @@ const AnswerInputForm = ({ data } : AnswerInputFormDataTypes) => {
     }
   };
 
-  const handleInputChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
     setActive(inputValue.trim() !== '');

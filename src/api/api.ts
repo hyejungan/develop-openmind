@@ -1,13 +1,18 @@
 const BASE_URL = 'https://openmind-api.vercel.app/1-1';
 
 type GetSubjectsTypes = {
-  id ?: string;
-  limit ?: number;
-  offset ?: string;
-  sort ?: string;
-}
+  id?: string;
+  limit?: number;
+  offset?: string;
+  sort?: string;
+};
 
-export async function getSubjects({id, limit = 8, offset = '', sort = 'time'} : GetSubjectsTypes) {
+export async function getSubjects({
+  id,
+  limit = 8,
+  offset = '',
+  sort = 'time',
+}: GetSubjectsTypes) {
   const subjectId = id ? `${id}/` : '';
   const query = id ? '' : `?limit=${limit}&offset=${offset}&sort=${sort}`;
   const response = await fetch(`${BASE_URL}/subjects/${subjectId}${query}`);
@@ -19,10 +24,10 @@ export async function getSubjects({id, limit = 8, offset = '', sort = 'time'} : 
 }
 
 type FormDataTypes = {
-  formData : string;
-}
+  formData: string;
+};
 
-export async function postSubjects({formData} : FormDataTypes) {
+export async function postSubjects({ formData }: FormDataTypes) {
   const response = await fetch(`${BASE_URL}/subjects/`, {
     method: 'POST',
     headers: {
@@ -38,12 +43,16 @@ export async function postSubjects({formData} : FormDataTypes) {
 }
 
 type GetSubjectsQuestionTypes = {
-  id : string;
-  limit : number;
-  offset : number;
-}
+  id: string;
+  limit: number;
+  offset: number;
+};
 
-export async function getSubjectsQuestion({id, limit = 2, offset} : GetSubjectsQuestionTypes) {
+export async function getSubjectsQuestion({
+  id,
+  limit = 2,
+  offset,
+}: GetSubjectsQuestionTypes) {
   const subjectId = id;
   const query = `?limit=${limit}&offset=${offset ?? 0}`;
   const response = await fetch(
@@ -57,11 +66,11 @@ export async function getSubjectsQuestion({id, limit = 2, offset} : GetSubjectsQ
 }
 
 type IdFormDataTypes = {
-  id : number;
-  formData : string;
-}
+  id: number;
+  formData: string;
+};
 
-export async function postSubjectsQuestion({id, formData} : IdFormDataTypes) {
+export async function postSubjectsQuestion({ id, formData }: IdFormDataTypes) {
   const response = await fetch(`${BASE_URL}/subjects/${id}/questions/`, {
     method: 'POST',
     headers: {
@@ -76,7 +85,7 @@ export async function postSubjectsQuestion({id, formData} : IdFormDataTypes) {
   return body;
 }
 
-export async function deleteSubjects({id} : {id : string}) {
+export async function deleteSubjects({ id }: { id: string }) {
   const response = await fetch(`${BASE_URL}/subjects/${id}/`, {
     method: 'DELETE',
   });
@@ -86,7 +95,7 @@ export async function deleteSubjects({id} : {id : string}) {
   return response.ok;
 }
 
-export async function deleteQuestion(id : number) {
+export async function deleteQuestion(id: number) {
   const response = await fetch(`${BASE_URL}/questions/${id}/`, {
     method: 'DELETE',
   });
@@ -95,7 +104,7 @@ export async function deleteQuestion(id : number) {
   }
 }
 
-export async function postAnswer({id, formData} : IdFormDataTypes) {
+export async function postAnswer({ id, formData }: IdFormDataTypes) {
   const response = await fetch(`${BASE_URL}/questions/${id}/answers/`, {
     method: 'POST',
     headers: {
@@ -110,7 +119,7 @@ export async function postAnswer({id, formData} : IdFormDataTypes) {
   return body;
 }
 
-export async function putAnswer({id, formData} : IdFormDataTypes) {
+export async function putAnswer({ id, formData }: IdFormDataTypes) {
   const response = await fetch(`${BASE_URL}/answers/${id}/`, {
     method: 'PUT',
     headers: {
@@ -125,7 +134,7 @@ export async function putAnswer({id, formData} : IdFormDataTypes) {
   return body;
 }
 
-export async function deleteAnswer(id : number) {
+export async function deleteAnswer(id: number) {
   const response = await fetch(`${BASE_URL}/answers/${id}/`, {
     method: 'DELETE',
   });
@@ -135,11 +144,14 @@ export async function deleteAnswer(id : number) {
 }
 
 type PostReactionOnQuestionTypes = {
-  questionId : Number;
-  formData : string;
-}
+  questionId: Number;
+  formData: string;
+};
 
-export async function postReactionOnQuestion({questionId : id, formData} : PostReactionOnQuestionTypes) {
+export async function postReactionOnQuestion({
+  questionId: id,
+  formData,
+}: PostReactionOnQuestionTypes) {
   const response = await fetch(`${BASE_URL}/questions/${id}/reaction/`, {
     method: 'POST',
     headers: {

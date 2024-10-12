@@ -1,12 +1,12 @@
 import * as Styled from './StyleDropDownList';
 
 type DropDownTypes = {
-  onNameClick : () => void;
-  onNewestClick : () => void;
-  sorted : string;
-}
+  onNameClick: () => void;
+  onNewestClick: () => void;
+  sorted: string;
+};
 
-function DropDownList({ onNameClick, onNewestClick, sorted } : DropDownTypes) {
+function DropDownList({ onNameClick, onNewestClick, sorted }: DropDownTypes) {
   return (
     <Styled.Ul>
       <li>

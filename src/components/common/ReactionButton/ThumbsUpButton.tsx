@@ -4,7 +4,7 @@ import { ReactComponent as ThumbsUp } from 'assets/icon/thumbs-up.svg';
 import * as Style from './StyleThumbsButton';
 import { ThumbsButtonTypes } from './ThumbsDownDown';
 
-const ThumbsUpButton = ({ number, questionId } : ThumbsButtonTypes) => {
+const ThumbsUpButton = ({ number, questionId }: ThumbsButtonTypes) => {
   const [likeNumber, setLikeNumber] = useState(number);
   const [active, setActive] = useState<'gray' | 'blue' | 'red'>('gray');
 
@@ -14,7 +14,7 @@ const ThumbsUpButton = ({ number, questionId } : ThumbsButtonTypes) => {
       const formData = JSON.stringify({
         type: 'like',
       });
-      const result = await postReactionOnQuestion({questionId, formData});
+      const result = await postReactionOnQuestion({ questionId, formData });
       setLikeNumber(result.like);
     } catch (err) {
       console.log(err);

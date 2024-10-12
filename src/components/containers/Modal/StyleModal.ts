@@ -7,7 +7,7 @@ const placeholderRotate = keyframes`
   }
 `;
 
-export const ModalBackground = styled.div<{back ?:'noBG'}>`
+export const ModalBackground = styled.div<{ back?: 'noBG' }>`
   background-color: ${({ back }) =>
     back === 'noBG' ? `rgba(0, 0, 0, 0)` : `rgba(0, 0, 0, 0.4)`};
   width: 100vw;
@@ -33,7 +33,7 @@ export const Spinner = styled.div`
   background-position: center;
 `;
 
-export const Container = styled.div<{smallContainer : boolean}>`
+export const Container = styled.div<{ smallContainer: boolean }>`
   display: flex;
   flex-direction: column;
   z-index: 9999;

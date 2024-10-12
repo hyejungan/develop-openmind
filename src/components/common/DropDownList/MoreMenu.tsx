@@ -1,18 +1,25 @@
 import * as Styled from './StyleDropDownList';
 
 type MoreListTypes = {
-  data : {
+  data: {
     questionId: number;
-    answerId : number;
-    isRejected : boolean;
+    answerId: number;
+    isRejected: boolean;
     handleDeleteQuestion: (questionId: number) => void;
     handleDeleteAnswer: (answerId: number) => void;
     handleRejectAnswer: (questionId: number) => void;
-  }
-}
+  };
+};
 
-function MoreList({ data } : MoreListTypes) {
-  const {questionId, answerId, isRejected, handleDeleteQuestion, handleDeleteAnswer, handleRejectAnswer} = data;
+function MoreList({ data }: MoreListTypes) {
+  const {
+    questionId,
+    answerId,
+    isRejected,
+    handleDeleteQuestion,
+    handleDeleteAnswer,
+    handleRejectAnswer,
+  } = data;
   const list = [
     {
       key: 1,

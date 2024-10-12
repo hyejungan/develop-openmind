@@ -3,10 +3,10 @@ import { StyledGlobal } from 'style/StyleGlobal';
 import * as Styled from './StyleModal';
 
 type ModalLoadingTypes = {
-  back ?: 'noBG'
-}
+  back?: 'noBG';
+};
 
-const ModalLoading = ({ back } : ModalLoadingTypes) => {
+const ModalLoading = ({ back }: ModalLoadingTypes) => {
   return (
     <>
       <StyledGlobal />

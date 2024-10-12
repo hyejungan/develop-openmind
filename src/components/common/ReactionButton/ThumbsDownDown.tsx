@@ -4,13 +4,13 @@ import { ReactComponent as ThumbsDown } from 'assets/icon/thumbs-down.svg';
 import * as Style from './StyleThumbsButton';
 
 export type ThumbsButtonTypes = {
-  number ?: number;
-  questionId ?: number;
-  onClick ?: () => void;
-  active ?: number;
-}
+  number?: number;
+  questionId?: number;
+  onClick?: () => void;
+  active?: number;
+};
 
-const ThumbsDownButton = ({ number, questionId } : ThumbsButtonTypes) => {
+const ThumbsDownButton = ({ number, questionId }: ThumbsButtonTypes) => {
   const [dislikeNumber, setDislikeNumber] = useState(number);
   const [active, setActive] = useState<'gray' | 'blue' | 'red'>('gray');
 
@@ -20,7 +20,7 @@ const ThumbsDownButton = ({ number, questionId } : ThumbsButtonTypes) => {
       const formData = JSON.stringify({
         type: 'dislike',
       });
-      const result = await postReactionOnQuestion({questionId, formData});
+      const result = await postReactionOnQuestion({ questionId, formData });
       setDislikeNumber(result.dislike);
     } catch (err) {
       console.log(err);

@@ -7,12 +7,16 @@ import { ThemeContext } from 'styled-components';
 import { getCardSectionType } from './FeedCardSection';
 
 type QuestionFeedCardSectionTypes = {
-  total : number;
-  data : getCardSectionType[];
-  subjectData : string[];
-}
+  total: number;
+  data: getCardSectionType[];
+  subjectData: string[];
+};
 
-const QuestionFeedCardSection = ({ total, data, subjectData } : QuestionFeedCardSectionTypes) => {
+const QuestionFeedCardSection = ({
+  total,
+  data,
+  subjectData,
+}: QuestionFeedCardSectionTypes) => {
   const theme = useContext(ThemeContext);
 
   return (

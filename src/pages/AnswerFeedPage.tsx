@@ -23,10 +23,18 @@ const AnswerFeedPage = () => {
   });
   const option = { filter: true };
 
-  const handleFeedCardSection = async (id : string, limit : number, offset : React.MutableRefObject<number>) => {
+  const handleFeedCardSection = async (
+    id: string,
+    limit: number,
+    offset: React.MutableRefObject<number>
+  ) => {
     setIsLoading(true);
     try {
-      const result = await getSubjectsQuestion({id, limit, offset : offset.current});
+      const result = await getSubjectsQuestion({
+        id,
+        limit,
+        offset: offset.current,
+      });
       const { count, next, results: questionData } = result;
       setQuestionData((prevData) => ({
         data: [...prevData.data, ...questionData],
@@ -42,13 +50,13 @@ const AnswerFeedPage = () => {
     }
   };
 
-  const handleCheckValidation = (id : string) => {
+  const handleCheckValidation = (id: string) => {
     if (!checkLocalStorageById(id)) {
       navigate('/UseYourOwnAccount');
     }
   };
 
-  const observeCallback = (entries : IntersectionObserverEntry[]) => {
+  const observeCallback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (isLoading) return;
       if (!entry.isIntersecting) return;

@@ -1,4 +1,8 @@
-export default function createPageArray(total: number, pageNum : number, arrLen : number) {
+export default function createPageArray(
+  total: number,
+  pageNum: number,
+  arrLen: number
+) {
   let pageArray = [];
 
   //1. arrLen>=TotalPage
