@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "target": "ES6",
+    "baseUrl": "src",
+    "moduleDetection": "auto",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom"]
+  },
+  "exclude": ["node_modules", "**/*.(spec|test).ts"],
+  "include": ["./src/**/*"]
+}

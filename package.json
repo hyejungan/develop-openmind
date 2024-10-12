@@ -6,6 +6,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
     "axios": "^1.6.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
@@ -16,13 +19,14 @@
     "react-scripts": "5.0.1",
     "react-snowfall": "^1.2.1",
     "styled-components": "^6.1.0",
+    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prettier" : "prettier --cache --write .",
+    "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
     "prepare": "husky install"
   },
@@ -45,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.34",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
