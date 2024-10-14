@@ -35,15 +35,20 @@ const QuestionListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [subjectData, setSubjectData] = useState([]);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
-  console.log(subjectData)
-  console.log(limit, scrollLimit)
+  console.log(subjectData);
+  console.log(limit, scrollLimit);
 
   const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
     setIsLoading(true);
-    console.log(args)
+    console.log(args);
     try {
-      const { results: data, count }= await getSubjects({ ...args });
-      setSubjectData((prevData) => [...prevData,...data,]);
+      const { results: data, count } = await getSubjects({ ...args });
+      setSubjectData((prevData) => {
+        const newData = data.filter(
+          (newItem : GetSubjectsTypes) => !prevData.some((prevItem) => prevItem.id === newItem.id)
+        );
+        return [...prevData, ...newData];
+      });
       setTotal(count);
     } catch (err) {
       console.error(err);
@@ -53,12 +58,12 @@ const QuestionListPage = () => {
     }
   };
   const handleScroll = useCallback(() => {
-    const { scrollTop, scrollHeight } = document.documentElement;
-  
-    if (window.innerHeight + scrollTop >= scrollHeight - 10 && !isLoading) {
-      setOffset((prevOffset) => prevOffset + scrollLimit); 
+    const { innerHeight, scrollY } = window;
+
+    if (innerHeight + scrollY >=  document.body.offsetHeight && !isLoading) {
+      setOffset((prevOffset) => prevOffset + scrollLimit);
     }
-  }, [isLoading]); 
+  }, [isLoading]);
 
   const handleNavClick = () => {
     if (checkLocalStorage()) {
@@ -68,7 +73,10 @@ const QuestionListPage = () => {
     }
   };
 
-  const fetchAdditionalData = async (additionalLimit: number, currentOffset: number) => {
+  const fetchAdditionalData = async (
+    additionalLimit: number,
+    currentOffset: number
+  ) => {
     await handleCardSection({
       id: null,
       limit: additionalLimit,
@@ -77,47 +85,47 @@ const QuestionListPage = () => {
     });
   };
 
-    // 화면 크기 변경 감지 및 처리
-    useEffect(() => {
-      if (browserWidth) {
-        const newLimit = browserWidth >= 910 ? 10 : 7;
-        const newScrollLimit = browserWidth >= 910 ? 8 : 6;
-  
-        // 첫 렌더링 시
-        if (!initialLoadComplete) {
-          setLimit(newLimit);
-          setScrollLimit(newScrollLimit);
-          handleCardSection({
-            id: null,
-            limit: newLimit,
-            offset: "0",
-            sort: sorted,
-          });
-          setInitialLoadComplete(true); // 첫 로딩 완료 표시
-        } else {
-          // 첫 렌더링 이후: 화면 크기가 변경되었을 때만 추가 데이터 로딩
-          if (subjectData.length < newLimit) {
-            const additionalLimit = newLimit - subjectData.length;
-            fetchAdditionalData(additionalLimit, subjectData.length);
-          }
-        }
-  
-        // 화면 크기 변경에 따라 limit, scrollLimit 업데이트
+  // 화면 크기 변경 감지 및 처리
+  useEffect(() => {
+    if (browserWidth) {
+      const newLimit = browserWidth >= 910 ? 10 : 7;
+      const newScrollLimit = browserWidth >= 910 ? 8 : 6;
+
+      // 첫 렌더링 시
+      if (!initialLoadComplete) {
         setLimit(newLimit);
         setScrollLimit(newScrollLimit);
-      }
-    }, [browserWidth]);
-
-    useEffect(() => {
-      if (limit !== null && offset > 0) {
         handleCardSection({
           id: null,
-          limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
-          offset: offset.toString(),
+          limit: newLimit,
+          offset: '0',
           sort: sorted,
         });
+        setInitialLoadComplete(true); // 첫 로딩 완료 표시
+      } else {
+        // 첫 렌더링 이후: 화면 크기가 변경되었을 때만 추가 데이터 로딩
+        if (subjectData.length < newLimit) {
+          const additionalLimit = newLimit - subjectData.length;
+          fetchAdditionalData(additionalLimit, subjectData.length);
+        }
       }
-    }, [sorted, offset, limit, scrollLimit]);
+
+      // 화면 크기 변경에 따라 limit, scrollLimit 업데이트
+      setLimit(newLimit);
+      setScrollLimit(newScrollLimit);
+    }
+  }, [browserWidth]);
+
+  useEffect(() => {
+    if (limit !== null && offset > 0) {
+      handleCardSection({
+        id: null,
+        limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
+        offset: offset.toString(),
+        sort: sorted,
+      });
+    }
+  }, [sorted, offset, limit, scrollLimit]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -136,7 +144,6 @@ const QuestionListPage = () => {
             <DropDown offset={offset} limit={limit} sorted={sorted} />
           </Styled.ListPageHeaderBox>
           <UserCardSection data={subjectData} />
-          
         </Styled.cardSectionContainer>
         {isOpen && (
           <Modal
@@ -153,7 +160,6 @@ const QuestionListPage = () => {
 };
 
 export default QuestionListPage;
-
 
 // console.log('window.innerHeight : ', window.innerHeight);
 //     console.log('window.scrollY : ', window.scrollY);
