@@ -24,32 +24,26 @@ type GetSubjectsTypes = {
 
 const QuestionListPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const sorted = location.pathname.split('/')[3];
+  const sorted = useLocation().pathname.split('/')[3];
   const { width: browserWidth } = useWindowSizeCustom();
   const { isOpen, closeModal, openModal } = useModal();
   const option = { center: true, smallContainer: true };
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(null);
+  const [scrollLimit, setScrollLimit] = useState(null);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [subjectData, setSubjectData] = useState({
-    data: [],
-  });
+  const [subjectData, setSubjectData] = useState([]);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  console.log(subjectData)
+  console.log(limit, scrollLimit)
 
   const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
     setIsLoading(true);
+    console.log(args)
     try {
-      const [result, total] = await Promise.all([
-        getSubjects({ ...args }),
-        getSubjects({ id: null, limit: 9999, offset: '0' }),
-      ]);
-      const { results: subjectData } = result;
-      const { count } = total;
-      setSubjectData((prevData) => ({
-        ...prevData,
-        data: subjectData,
-      }));
+      const { results: data, count }= await getSubjects({ ...args });
+      setSubjectData((prevData) => [...prevData,...data,]);
       setTotal(count);
     } catch (err) {
       console.error(err);
@@ -58,15 +52,13 @@ const QuestionListPage = () => {
       setIsLoading(false);
     }
   };
-
-  const handleLimitChange = useCallback(() => {
-    if (!browserWidth) return;
-    if (browserWidth >= 910) {
-      setLimit(8);
-    } else {
-      setLimit(6);
+  const handleScroll = useCallback(() => {
+    const { scrollTop, scrollHeight } = document.documentElement;
+  
+    if (window.innerHeight + scrollTop >= scrollHeight - 10 && !isLoading) {
+      setOffset((prevOffset) => prevOffset + scrollLimit); 
     }
-  }, [browserWidth]);
+  }, [isLoading]); 
 
   const handleNavClick = () => {
     if (checkLocalStorage()) {
@@ -76,25 +68,63 @@ const QuestionListPage = () => {
     }
   };
 
-  const handleRedirect = (queryString: string) => {
-    if (queryString.trim() !== 'name' && queryString.trim() !== 'time') {
-      navigate(`/${queryString}`);
-    }
-  };
-
-  useEffect(() => {
-    handleRedirect(sorted);
-    handleCardSection({
+  const fetchAdditionalData = async (additionalLimit: number, currentOffset: number) => {
+    await handleCardSection({
       id: null,
-      limit,
-      offset: offset.toString(),
+      limit: additionalLimit,
+      offset: currentOffset.toString(),
       sort: sorted,
     });
-  }, [location, offset, limit]);
+  };
+
+    // 화면 크기 변경 감지 및 처리
+    useEffect(() => {
+      if (browserWidth) {
+        const newLimit = browserWidth >= 910 ? 10 : 7;
+        const newScrollLimit = browserWidth >= 910 ? 8 : 6;
+  
+        // 첫 렌더링 시
+        if (!initialLoadComplete) {
+          setLimit(newLimit);
+          setScrollLimit(newScrollLimit);
+          handleCardSection({
+            id: null,
+            limit: newLimit,
+            offset: "0",
+            sort: sorted,
+          });
+          setInitialLoadComplete(true); // 첫 로딩 완료 표시
+        } else {
+          // 첫 렌더링 이후: 화면 크기가 변경되었을 때만 추가 데이터 로딩
+          if (subjectData.length < newLimit) {
+            const additionalLimit = newLimit - subjectData.length;
+            fetchAdditionalData(additionalLimit, subjectData.length);
+          }
+        }
+  
+        // 화면 크기 변경에 따라 limit, scrollLimit 업데이트
+        setLimit(newLimit);
+        setScrollLimit(newScrollLimit);
+      }
+    }, [browserWidth]);
+
+    useEffect(() => {
+      if (limit !== null && offset > 0) {
+        handleCardSection({
+          id: null,
+          limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
+          offset: offset.toString(),
+          sort: sorted,
+        });
+      }
+    }, [sorted, offset, limit, scrollLimit]);
 
   useEffect(() => {
-    handleLimitChange();
-  }, [handleLimitChange]);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // 언마운트 시 이벤트 해제
+    };
+  }, [handleScroll]);
 
   return (
     <>
@@ -105,16 +135,8 @@ const QuestionListPage = () => {
             <Styled.ListPageHeader>누구에게 질문할까요?</Styled.ListPageHeader>
             <DropDown offset={offset} limit={limit} sorted={sorted} />
           </Styled.ListPageHeaderBox>
-          <UserCardSection data={subjectData.data} />
-          {isLoading || (
-            <Pagination
-              total={total}
-              onClick={setOffset}
-              limit={limit}
-              width={browserWidth}
-              sorted={sorted}
-            />
-          )}
+          <UserCardSection data={subjectData} />
+          
         </Styled.cardSectionContainer>
         {isOpen && (
           <Modal
@@ -131,3 +153,10 @@ const QuestionListPage = () => {
 };
 
 export default QuestionListPage;
+
+
+// console.log('window.innerHeight : ', window.innerHeight);
+//     console.log('window.scrollY : ', window.scrollY);
+//     console.log('window.scrollTop : ', document.documentElement.scrollTop);
+//     console.log('document.body.offsetHeight :', document.documentElement.offsetHeight);
+//     console.log('document.documentElement.scrollHeight:', document.documentElement.scrollHeight);

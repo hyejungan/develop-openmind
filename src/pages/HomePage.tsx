@@ -12,7 +12,6 @@ import { getSubjects, postSubjects } from 'api/api';
 import { getLocalStorage, setLocalStorage } from 'utils/localStorage';
 import useWindowSizeCustom from 'hooks/useWindowSize';
 import * as Styled from './StyleHomePage';
-import { NumberLiteralType, StringLiteral } from 'typescript';
 
 interface OutletContextType {
   setTheme: (theme: any) => void;

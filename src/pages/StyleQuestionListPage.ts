@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,7 +13,6 @@ export const PageContainer = styled.div`
 
 export const cardSectionContainer = styled.section`
   width: 100%;
-  height: 100%;
   padding: 0 125px;
   display: flex;
   flex-direction: column;
