@@ -70,28 +70,31 @@ const QuestionListPage = () => {
     });
   };
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      console.log(entry)
-      if(entry.isIntersecting) {
-        setOffset((prevOffset) => prevOffset + scrollLimit);
-      }
-    })
-  }, {threshold: 0.1});
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        console.log(entry);
+        if (entry.isIntersecting) {
+          setOffset((prevOffset) => prevOffset + scrollLimit);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
 
-    console.log(limit, offset, scrollLimit)
+  console.log(limit, offset, scrollLimit);
 
   useEffect(() => {
-    if(ref.current) {
-      io.observe(ref.current)
+    if (ref.current) {
+      io.observe(ref.current);
     }
 
     return () => {
-      if(ref.current) {
-        io.unobserve(ref.current)
+      if (ref.current) {
+        io.unobserve(ref.current);
       }
-    }
-  }, [ref.current, scrollLimit])
+    };
+  }, [ref.current, scrollLimit]);
 
   const handleNavClick = () => {
     if (checkLocalStorage()) {
@@ -143,9 +146,7 @@ const QuestionListPage = () => {
     }
   }, [sorted, offset, limit, scrollLimit]);
 
-  useEffect(() => {
-
-  })
+  useEffect(() => {});
 
   return (
     <>
@@ -157,7 +158,7 @@ const QuestionListPage = () => {
             <DropDown offset={offset} limit={limit} sorted={sorted} />
           </Styled.ListPageHeaderBox>
           <UserCardSection data={subjectData} />
-          <Styled.refContainer ref={ref} ></Styled.refContainer>
+          <Styled.refContainer ref={ref}></Styled.refContainer>
         </Styled.cardSectionContainer>
         {isOpen && (
           <Modal
