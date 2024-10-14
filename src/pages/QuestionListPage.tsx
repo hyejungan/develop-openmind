@@ -45,7 +45,8 @@ const QuestionListPage = () => {
       const { results: data, count } = await getSubjects({ ...args });
       setSubjectData((prevData) => {
         const newData = data.filter(
-          (newItem : GetSubjectsTypes) => !prevData.some((prevItem) => prevItem.id === newItem.id)
+          (newItem: GetSubjectsTypes) =>
+            !prevData.some((prevItem) => prevItem.id === newItem.id)
         );
         return [...prevData, ...newData];
       });
@@ -60,7 +61,7 @@ const QuestionListPage = () => {
   const handleScroll = useCallback(() => {
     const { innerHeight, scrollY } = window;
 
-    if (innerHeight + scrollY >=  document.body.offsetHeight && !isLoading) {
+    if (innerHeight + scrollY >= document.body.offsetHeight && !isLoading) {
       setOffset((prevOffset) => prevOffset + scrollLimit);
     }
   }, [isLoading]);
