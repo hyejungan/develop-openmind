@@ -40,7 +40,7 @@ const QuestionListPage = () => {
   const [isAllDataLoaded, setIsAllDataLoaded] = useState(false);
 
   const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
-    console.log(1)
+    console.log(1);
     setIsLoading(true);
     try {
       const { results: data, count } = await getSubjects({ ...args });
@@ -82,13 +82,13 @@ const QuestionListPage = () => {
         }
       });
     },
-    { threshold: 0.1}
+    { threshold: 0.1 }
   );
 
   useEffect(() => {
-      if (ref.current) {
-        io.observe(ref.current);
-      }
+    if (ref.current) {
+      io.observe(ref.current);
+    }
 
     return () => {
       if (ref.current) {
@@ -107,7 +107,7 @@ const QuestionListPage = () => {
 
   // 화면 크기 변경 감지 및 처리
   useEffect(() => {
-    console.log(3)
+    console.log(3);
     if (browserWidth) {
       const newLimit = browserWidth >= 910 ? 10 : 7;
       const newScrollLimit = browserWidth >= 910 ? 8 : 6;
@@ -148,7 +148,7 @@ const QuestionListPage = () => {
   }, [sorted]);
 
   useEffect(() => {
-    console.log(5)
+    console.log(5);
     if (limit !== null && offset !== 0 && subjectData.length < total) {
       handleCardSection({
         id: null,
@@ -157,7 +157,7 @@ const QuestionListPage = () => {
         sort: sorted,
       });
     } else if (total !== null && subjectData.length >= total) {
-      setIsAllDataLoaded(true); 
+      setIsAllDataLoaded(true);
     }
   }, [sorted, offset, scrollLimit]);
 
@@ -174,21 +174,21 @@ const QuestionListPage = () => {
         </Styled.cardSectionContainer>
         {isOpen && (
           <Modal
-          title="계정이 있으신가요?"
-          trigger={<CheckAccount />}
-          option={option}
-          closeModal={closeModal}
+            title="계정이 있으신가요?"
+            trigger={<CheckAccount />}
+            option={option}
+            closeModal={closeModal}
           />
-          )}
+        )}
         {isLoading && <ModalLoading />}
         {!isLoading &&
-        (isAllDataLoaded ? (  // 모든 데이터를 불러왔을 때 메시지 표시
-          <Styled.AllDataLoadedMessage>
-            모든 데이터를 불러왔습니다:)
-          </Styled.AllDataLoadedMessage>
-        ) : (
-          <Styled.refContainer ref={ref} />
-        ))}
+          (isAllDataLoaded ? ( // 모든 데이터를 불러왔을 때 메시지 표시
+            <Styled.AllDataLoadedMessage>
+              모든 데이터를 불러왔습니다:)
+            </Styled.AllDataLoadedMessage>
+          ) : (
+            <Styled.refContainer ref={ref} />
+          ))}
       </Styled.PageContainer>
     </>
   );

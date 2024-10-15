@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PageContainer = styled.div`
   width: 100%;
-  height : 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,7 +14,7 @@ export const PageContainer = styled.div`
 
 export const cardSectionContainer = styled.section`
   width: 100%;
-  height : 100%;
+  height: 100%;
   padding: 0 125px;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,6 @@ export const refContainer = styled.div`
   height: 50px;
   border: 1px solid red;
 `;
-
 
 export const AllDataLoadedMessage = styled.div`
   width: 100%;
