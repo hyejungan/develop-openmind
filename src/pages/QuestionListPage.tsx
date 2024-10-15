@@ -26,13 +26,13 @@ const QuestionListPage = () => {
   const ref = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const sorted = location.pathname.split('/')[3];
+  const sort = location.pathname.split('/')[3];
   const { width: browserWidth } = useWindowSizeCustom();
   const { isOpen, closeModal, openModal } = useModal();
   const option = { center: true, smallContainer: true };
   const [limit, setLimit] = useState(null);
   const [scrollLimit, setScrollLimit] = useState(null);
-  const [offset, setOffset] = useState(0);
+  const offsetRef = useRef(0);
   const [total, setTotal] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [subjectData, setSubjectData] = useState([]);
@@ -69,16 +69,23 @@ const QuestionListPage = () => {
       id: null,
       limit: additionalLimit,
       offset: currentOffset.toString(),
-      sort: sorted,
+      sort,
     });
   };
 
   const io = new IntersectionObserver(
     (entries) => {
+      console.log(3);
       entries.forEach((entry) => {
         console.log(entry);
         if (entry.isIntersecting) {
-          setOffset((prevOffset) => prevOffset + scrollLimit);
+          offsetRef.current += scrollLimit;
+          handleCardSection({
+            id: null,
+            limit: scrollLimit,
+            offset: offsetRef.current.toString(),
+            sort,
+          });
         }
       });
     },
@@ -86,6 +93,7 @@ const QuestionListPage = () => {
   );
 
   useEffect(() => {
+    console.log(4);
     if (ref.current) {
       io.observe(ref.current);
     }
@@ -107,23 +115,26 @@ const QuestionListPage = () => {
 
   // 화면 크기 변경 감지 및 처리
   useEffect(() => {
-    console.log(3);
+    console.log(5);
     if (browserWidth) {
+      console.log(6);
       const newLimit = browserWidth >= 910 ? 10 : 7;
       const newScrollLimit = browserWidth >= 910 ? 8 : 6;
 
       // 첫 렌더링 시
       if (!initialLoadComplete) {
+        console.log(7);
         setLimit(newLimit);
         setScrollLimit(newScrollLimit);
         handleCardSection({
           id: null,
           limit: newLimit,
           offset: '0',
-          sort: sorted,
+          sort,
         });
         setInitialLoadComplete(true); // 첫 로딩 완료 표시
       } else {
+        console.log(8);
         // 첫 렌더링 이후: 화면 크기가 변경되었을 때만 추가 데이터 로딩
         if (subjectData.length < newLimit) {
           const additionalLimit = newLimit - subjectData.length;
@@ -136,30 +147,33 @@ const QuestionListPage = () => {
   }, [browserWidth]);
 
   useEffect(() => {
+    console.log(9);
     setSubjectData([]); // 기존 데이터 초기화
-    setOffset(0); // offset을 0으로 리셋
-    setIsAllDataLoaded(false); // 모든 데이터를 불러왔다는 상태 초기화
+    offsetRef.current = 0; // offset을 0으로 리셋
+    setInitialLoadComplete(false); 
     handleCardSection({
       id: null,
-      limit: limit,
-      offset: '0',
-      sort: sorted, // 정렬 기준 변경에 따라 데이터 다시 로드
+      limit,
+      offset: offsetRef.current.toString(),
+      sort, // 정렬 기준 변경에 따라 데이터 다시 로드
     });
-  }, [sorted]);
+  }, [sort]);
 
   useEffect(() => {
-    console.log(5);
-    if (limit !== null && offset !== 0 && subjectData.length < total) {
+    console.log(10);
+    if (limit !== null && offsetRef.current !== 0 && initialLoadComplete && subjectData.length < total) {
+      console.log(11);
       handleCardSection({
         id: null,
         limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
-        offset: offset.toString(),
-        sort: sorted,
+        offset: offsetRef.current.toString(),
+        sort,
       });
     } else if (total !== null && subjectData.length >= total) {
+      console.log(12);
       setIsAllDataLoaded(true);
     }
-  }, [sorted, offset, scrollLimit]);
+  }, [sort, scrollLimit]);
 
   return (
     <>
@@ -168,7 +182,7 @@ const QuestionListPage = () => {
         <Styled.cardSectionContainer>
           <Styled.ListPageHeaderBox>
             <Styled.ListPageHeader>누구에게 질문할까요?</Styled.ListPageHeader>
-            <DropDown offset={offset} limit={limit} sorted={sorted} />
+            <DropDown offset={offsetRef.current} limit={limit} sorted={sort} />
           </Styled.ListPageHeaderBox>
           <UserCardSection data={subjectData} />
         </Styled.cardSectionContainer>
