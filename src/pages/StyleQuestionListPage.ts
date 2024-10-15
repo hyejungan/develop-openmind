@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PageContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -28,6 +28,22 @@ export const cardSectionContainer = styled.section`
   @media (max-width: 767px) {
     gap: 15px;
   }
+`;
+
+export const refContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  border: 1px solid red;
+`;
+
+export const AllDataLoadedMessage = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: green;
 `;
 
 export const ListPageHeaderBox = styled.div`
