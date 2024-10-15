@@ -37,8 +37,10 @@ const QuestionListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [subjectData, setSubjectData] = useState([]);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [isAllDataLoaded, setIsAllDataLoaded] = useState(false);
 
   const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
+    console.log(1)
     setIsLoading(true);
     try {
       const { results: data, count } = await getSubjects({ ...args });
@@ -62,6 +64,7 @@ const QuestionListPage = () => {
     additionalLimit: number,
     currentOffset: number
   ) => {
+    console.log(2);
     await handleCardSection({
       id: null,
       limit: additionalLimit,
@@ -79,15 +82,13 @@ const QuestionListPage = () => {
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.1}
   );
 
-  console.log(limit, offset, scrollLimit);
-
   useEffect(() => {
-    if (ref.current) {
-      io.observe(ref.current);
-    }
+      if (ref.current) {
+        io.observe(ref.current);
+      }
 
     return () => {
       if (ref.current) {
@@ -106,6 +107,7 @@ const QuestionListPage = () => {
 
   // 화면 크기 변경 감지 및 처리
   useEffect(() => {
+    console.log(3)
     if (browserWidth) {
       const newLimit = browserWidth >= 910 ? 10 : 7;
       const newScrollLimit = browserWidth >= 910 ? 8 : 6;
@@ -128,25 +130,36 @@ const QuestionListPage = () => {
           fetchAdditionalData(additionalLimit, subjectData.length);
         }
       }
-
-      // 화면 크기 변경에 따라 limit, scrollLimit 업데이트
       setLimit(newLimit);
       setScrollLimit(newScrollLimit);
     }
   }, [browserWidth]);
 
   useEffect(() => {
-    if (limit !== null && offset !== 0) {
+    setSubjectData([]); // 기존 데이터 초기화
+    setOffset(0); // offset을 0으로 리셋
+    setIsAllDataLoaded(false); // 모든 데이터를 불러왔다는 상태 초기화
+    handleCardSection({
+      id: null,
+      limit: limit,
+      offset: '0',
+      sort: sorted, // 정렬 기준 변경에 따라 데이터 다시 로드
+    });
+  }, [sorted]);
+
+  useEffect(() => {
+    console.log(5)
+    if (limit !== null && offset !== 0 && subjectData.length < total) {
       handleCardSection({
         id: null,
         limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
         offset: offset.toString(),
         sort: sorted,
       });
+    } else if (total !== null && subjectData.length >= total) {
+      setIsAllDataLoaded(true); 
     }
-  }, [sorted, offset, limit, scrollLimit]);
-
-  useEffect(() => {});
+  }, [sorted, offset, scrollLimit]);
 
   return (
     <>
@@ -158,17 +171,24 @@ const QuestionListPage = () => {
             <DropDown offset={offset} limit={limit} sorted={sorted} />
           </Styled.ListPageHeaderBox>
           <UserCardSection data={subjectData} />
-          <Styled.refContainer ref={ref}></Styled.refContainer>
         </Styled.cardSectionContainer>
         {isOpen && (
           <Modal
-            title="계정이 있으신가요?"
-            trigger={<CheckAccount />}
-            option={option}
-            closeModal={closeModal}
+          title="계정이 있으신가요?"
+          trigger={<CheckAccount />}
+          option={option}
+          closeModal={closeModal}
           />
-        )}
+          )}
         {isLoading && <ModalLoading />}
+        {!isLoading &&
+        (isAllDataLoaded ? (  // 모든 데이터를 불러왔을 때 메시지 표시
+          <Styled.AllDataLoadedMessage>
+            모든 데이터를 불러왔습니다:)
+          </Styled.AllDataLoadedMessage>
+        ) : (
+          <Styled.refContainer ref={ref} />
+        ))}
       </Styled.PageContainer>
     </>
   );
