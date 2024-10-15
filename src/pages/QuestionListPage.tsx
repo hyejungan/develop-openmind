@@ -150,7 +150,7 @@ const QuestionListPage = () => {
     console.log(9);
     setSubjectData([]); // 기존 데이터 초기화
     offsetRef.current = 0; // offset을 0으로 리셋
-    setInitialLoadComplete(false); 
+    setInitialLoadComplete(false);
     handleCardSection({
       id: null,
       limit,
@@ -161,7 +161,12 @@ const QuestionListPage = () => {
 
   useEffect(() => {
     console.log(10);
-    if (limit !== null && offsetRef.current !== 0 && initialLoadComplete && subjectData.length < total) {
+    if (
+      limit !== null &&
+      offsetRef.current !== 0 &&
+      initialLoadComplete &&
+      subjectData.length < total
+    ) {
       console.log(11);
       handleCardSection({
         id: null,
