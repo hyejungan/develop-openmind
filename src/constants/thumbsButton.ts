@@ -4,7 +4,7 @@ const REACTION_TYPE = {
 };
 
 // 반응 타입별 색상 매핑
-const REACTION_COLOR : Record<'like' | 'dislike', 'blue' | 'red'> = {
+const REACTION_COLOR: Record<'like' | 'dislike', 'blue' | 'red'> = {
   like: 'blue',
   dislike: 'red',
 };

@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { BUTTON_COLOR} from 'constants/thumbsButton';
+import { BUTTON_COLOR } from 'constants/thumbsButton';
 
 export const Container = styled.button<{ active: 'gray' | 'blue' | 'red' }>`
   display: flex;

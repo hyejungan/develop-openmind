@@ -1,6 +1,3 @@
-function useReactionCount () {
+function useReactionCount() {}
 
-
-}
-
-export default useReactionCount
+export default useReactionCount;
