@@ -4,7 +4,6 @@ import {
   NavBar,
   DropDown,
   UserCardSection,
-  Pagination,
   ModalLoading,
   Modal,
   CheckAccount,
@@ -40,7 +39,6 @@ const QuestionListPage = () => {
   const [isAllDataLoaded, setIsAllDataLoaded] = useState(false);
 
   const handleCardSection = async (args: Partial<GetSubjectsTypes>) => {
-    console.log(1);
     setIsLoading(true);
     try {
       const { results: data, count } = await getSubjects({ ...args });
@@ -64,7 +62,6 @@ const QuestionListPage = () => {
     additionalLimit: number,
     currentOffset: number
   ) => {
-    console.log(2);
     await handleCardSection({
       id: null,
       limit: additionalLimit,
@@ -75,9 +72,7 @@ const QuestionListPage = () => {
 
   const io = new IntersectionObserver(
     (entries) => {
-      console.log(3);
       entries.forEach((entry) => {
-        console.log(entry);
         if (entry.isIntersecting) {
           offsetRef.current += scrollLimit;
           handleCardSection({
@@ -93,7 +88,6 @@ const QuestionListPage = () => {
   );
 
   useEffect(() => {
-    console.log(4);
     if (ref.current) {
       io.observe(ref.current);
     }
@@ -115,15 +109,12 @@ const QuestionListPage = () => {
 
   // 화면 크기 변경 감지 및 처리
   useEffect(() => {
-    console.log(5);
     if (browserWidth) {
-      console.log(6);
       const newLimit = browserWidth >= 910 ? 10 : 7;
       const newScrollLimit = browserWidth >= 910 ? 8 : 6;
 
       // 첫 렌더링 시
       if (!initialLoadComplete) {
-        console.log(7);
         setLimit(newLimit);
         setScrollLimit(newScrollLimit);
         handleCardSection({
@@ -134,7 +125,6 @@ const QuestionListPage = () => {
         });
         setInitialLoadComplete(true); // 첫 로딩 완료 표시
       } else {
-        console.log(8);
         // 첫 렌더링 이후: 화면 크기가 변경되었을 때만 추가 데이터 로딩
         if (subjectData.length < newLimit) {
           const additionalLimit = newLimit - subjectData.length;
@@ -147,7 +137,6 @@ const QuestionListPage = () => {
   }, [browserWidth]);
 
   useEffect(() => {
-    console.log(9);
     setSubjectData([]); // 기존 데이터 초기화
     offsetRef.current = 0; // offset을 0으로 리셋
     setInitialLoadComplete(false);
@@ -160,14 +149,12 @@ const QuestionListPage = () => {
   }, [sort]);
 
   useEffect(() => {
-    console.log(10);
     if (
       limit !== null &&
       offsetRef.current !== 0 &&
       initialLoadComplete &&
       subjectData.length < total
     ) {
-      console.log(11);
       handleCardSection({
         id: null,
         limit: scrollLimit, // 스크롤 시에는 scrollLimit 적용
@@ -175,7 +162,6 @@ const QuestionListPage = () => {
         sort,
       });
     } else if (total !== null && subjectData.length >= total) {
-      console.log(12);
       setIsAllDataLoaded(true);
     }
   }, [sort, scrollLimit]);
