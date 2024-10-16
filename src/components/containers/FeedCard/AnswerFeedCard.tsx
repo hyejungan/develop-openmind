@@ -102,7 +102,11 @@ function AnswerFeedCard({
       )}
       <Styled.Footer>
         <Styled.FooterIcons>
-          <ReactionButton like={like} dislike={dislike}  questionId={questionId} />
+          <ReactionButton
+            like={like}
+            dislike={dislike}
+            questionId={questionId}
+          />
         </Styled.FooterIcons>
         {/* 답변이 있는 상태 + 답변 거절이 아닐 때 -> 수정하기 버튼 보이기 */}
         {answer && !answer?.isRejected && (

@@ -52,7 +52,11 @@ const FeedCard = ({ data, subjectData }: FeedCardTypes) => {
       ) : null}
       <Styled.Footer>
         <Styled.FooterIcons>
-          <ReactionButton like={like} dislike={dislike} questionId={questionId}/>
+          <ReactionButton
+            like={like}
+            dislike={dislike}
+            questionId={questionId}
+          />
         </Styled.FooterIcons>
       </Styled.Footer>
     </Styled.CardContainer>

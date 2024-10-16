@@ -2,49 +2,47 @@ import { useState } from 'react';
 import { postReactionOnQuestion } from 'api/api';
 import { ReactComponent as ThumbsUp } from 'assets/icon/thumbs-up.svg';
 import * as Style from './StyleThumbsButton';
+import {
+  BUTTON_COLOR,
+  REACTION_COLOR,
+  REACTION_TYPE,
+} from 'constants/thumbsButton';
 
 export interface ThumbsButtonTypes {
-  reactionCount : number;
+  reactionCount: number;
   questionId: number;
-  type: '좋아요' | '싫어요';
-  onClick?: () => void;
+  type: 'like' | 'dislike';
 }
 
-const ThumbsButton = ({ reactionCount, questionId, type, onClick}: ThumbsButtonTypes) => {
-  const [likeNumber, setLikeNumber] = useState(reactionCount);
-  const [active, setActive] = useState<'gray' | 'blue' | 'red'>('gray');
-  const [counting, setCounting] = useState({ up: null, down: null });
-
-  const handleCount = (type: 'up' | 'down') => {
-    if (!counting[type]) {
-      setCounting((prevCounting) => ({ ...prevCounting, [type]: 1 }));
-    } else {
-      setCounting((prevCounting) => ({ ...prevCounting, [type]: null }));
-    }
-  };
+const ThumbsButton = ({
+  reactionCount,
+  questionId,
+  type,
+}: ThumbsButtonTypes) => {
+  const [count, setCount] = useState(reactionCount);
+  const [active, setActive] = useState<'blue' | 'red' | 'gray'>(
+    reactionCount ? REACTION_COLOR[type] : 'gray'
+  );
 
   const handleActiveClick = async () => {
-    setActive('blue');
     try {
-      const formData = JSON.stringify({
-        type: 'like',
-      });
+      const formData = JSON.stringify({ type });
       const result = await postReactionOnQuestion({ questionId, formData });
-      setLikeNumber(result.like);
+      setCount(result[type]);
     } catch (err) {
       console.log(err);
     } finally {
       setTimeout(() => {
-        setActive('gray');
+        setActive(REACTION_COLOR[type]);
       }, 300);
     }
   };
 
   return (
     <Style.Container active={active} onClick={handleActiveClick}>
-      <ThumbsUp fill={active === 'blue' ? 'var(--blue)' : 'var(--gray40)'} />
+      <ThumbsUp fill={BUTTON_COLOR[active]} />
       <span>
-        {type} {likeNumber}
+        {REACTION_TYPE[type]} {count}
       </span>
     </Style.Container>
   );

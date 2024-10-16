@@ -1,26 +1,25 @@
-import { useState } from 'react';
+import ThumbsButton from 'components/common/ReactionButton/ThumbsButton';
 import * as Style from './StyleReactionButton';
-import ThumbsButton, { ThumbsButtonTypes } from 'components/common/ReactionButton/ThumbsButton';
 
-export interface ReactionButtonTypes{
+export interface ReactionButtonTypes {
   like?: number;
-  dislike ?: number;
+  dislike?: number;
   questionId: number;
-};
+}
 
-const ReactionButton = ({ like, dislike, questionId}: ReactionButtonTypes) => {
-
+const ReactionButton = ({ like, dislike, questionId }: ReactionButtonTypes) => {
+  console.log(dislike)
   return (
     <Style.Container>
       <ThumbsButton
         reactionCount={like}
         questionId={questionId}
-        type='좋아요'
+        type='like'
       />
       <ThumbsButton
         reactionCount={dislike}
         questionId={questionId}
-        type='싫어요'
+        type="dislike"
       />
     </Style.Container>
   );
