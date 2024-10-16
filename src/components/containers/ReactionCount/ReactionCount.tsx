@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as Style from './StyleReactionCount';
-import ThumbsUpButton from 'components/common/ReactionButton/ThumbsUpButton';
-import ThumbsDownButton from 'components/common/ReactionButton/ThumbsDownDown';
+import ThumbsButton from 'components/common/ReactionButton/ThumbsButton';
+import ThumbsDownButton from 'components/common/ReactionButton/ThumbsDownButton';
 
 const ReactionButton = () => {
   const [counting, setCounting] = useState({ up: null, down: null });
@@ -16,17 +16,19 @@ const ReactionButton = () => {
 
   return (
     <Style.Container>
-      <ThumbsUpButton
+      <ThumbsButton
         onClick={() => {
           handleCount('up');
         }}
         active={counting.up}
+        type='좋아요'
       />
-      <ThumbsDownButton
+      <ThumbsButton
         onClick={() => {
           handleCount('down');
         }}
         active={counting.down}
+        type='싫어요'
       />
     </Style.Container>
   );
