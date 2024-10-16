@@ -33,7 +33,7 @@ export const cardSectionContainer = styled.section`
 export const refContainer = styled.div`
   width: 100%;
   height: 50px;
-  border: 1px solid red;
+  border: 1px solid none;
 `;
 
 export const AllDataLoadedMessage = styled.div`

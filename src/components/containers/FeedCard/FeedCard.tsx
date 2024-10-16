@@ -8,6 +8,7 @@ import {
 import { timeForToday } from 'utils/moment';
 import * as Styled from './StyleFeedCard';
 import { getCardSectionType } from './FeedCardSection';
+import ReactionButton from '../ReactionCount/ReactionButton';
 
 type FeedCardTypes = {
   data: getCardSectionType;
@@ -51,12 +52,11 @@ const FeedCard = ({ data, subjectData }: FeedCardTypes) => {
       ) : null}
       <Styled.Footer>
         <Styled.FooterIcons>
-          <Styled.FooterIconContainer>
-            <ThumbsUpButton number={like} questionId={questionId} />
-          </Styled.FooterIconContainer>
-          <Styled.FooterIconContainer>
-            <ThumbsDownButton number={dislike} questionId={questionId} />
-          </Styled.FooterIconContainer>
+          <ReactionButton
+            like={like}
+            dislike={dislike}
+            questionId={questionId}
+          />
         </Styled.FooterIcons>
       </Styled.Footer>
     </Styled.CardContainer>
