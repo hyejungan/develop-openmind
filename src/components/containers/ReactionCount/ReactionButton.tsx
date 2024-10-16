@@ -8,7 +8,6 @@ export interface ReactionButtonTypes {
 }
 
 const ReactionButton = ({ like, dislike, questionId }: ReactionButtonTypes) => {
-  console.log(dislike);
   return (
     <Style.Container>
       <ThumbsButton reactionCount={like} questionId={questionId} type="like" />
