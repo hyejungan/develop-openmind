@@ -12,6 +12,7 @@ import { timeForToday } from 'utils/moment';
 import { More } from 'components';
 import * as Styled from './StyleAnswerFeedCard';
 import { getCardSectionType } from './FeedCardSection';
+import ReactionButton from '../ReactionCount/ReactionButton';
 
 type AnswerFeedCardTypes = {
   data: getCardSectionType;
@@ -101,12 +102,7 @@ function AnswerFeedCard({
       )}
       <Styled.Footer>
         <Styled.FooterIcons>
-          <Styled.FooterIconContainer>
-            <ThumbsUpButton number={like} questionId={questionId} />
-          </Styled.FooterIconContainer>
-          <Styled.FooterIconContainer>
-            <ThumbsDownButton number={dislike} questionId={questionId} />
-          </Styled.FooterIconContainer>
+          <ReactionButton like={like} dislike={dislike}  questionId={questionId} />
         </Styled.FooterIcons>
         {/* 답변이 있는 상태 + 답변 거절이 아닐 때 -> 수정하기 버튼 보이기 */}
         {answer && !answer?.isRejected && (
